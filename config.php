@@ -20,9 +20,9 @@ function getDBConnection() {
         ];
         return new PDO($dsn, DB_USER, DB_PASS, $options);
     } catch (PDOException $e) {
-        //header("Location:index.php");
-        //exit();
-        die("Erreur de connexion : " . $e->getMessage());
+        header("Location:index.php");
+        exit();
+        //die("Erreur de connexion : " . $e->getMessage());
     }
 }
 ?>
