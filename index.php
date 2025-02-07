@@ -1,18 +1,25 @@
 <?php
 $pageTitle = "Accueil";
 require_once 'includes/header.php';
+
+$pageTitle = "Accueil";
+require_once 'includes/header.php';
+
+// Connexion à la base de données
+$host = 'localhost';
+$dbname = 'Voitures';
+$username = 'root';
+$password = 'root'; // Sur MAMP, le mot de passe par défaut est souvent 'root'
+
+try {
+    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); // Activer les erreurs PDO
+} catch (PDOException $e) {
+    die("Erreur de connexion à la base de données : " . $e->getMessage());
+}
+
 ?>
-<!-- Début du contenu de la page -->
-
-<p>Hello World !</p>
-
-<!-- Fin du contenu de la page -->
-<?php
-require_once 'includes/footer.php';
-?>
-
-
-<!DOCTYPE html>
+<!<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -95,6 +102,7 @@ require_once 'includes/footer.php';
                                 </li>
                             </ul>
                         </div>
+                        <button type="submit" class="btn mt-3 w-100 btn-primary">Rechercher</button>
                 </div>
                 <div class="col-12 offset-1 col-md-7 bg-light">
                     <div class="titres">
@@ -131,3 +139,12 @@ require_once 'includes/footer.php';
     </section>
 </body>
 </html>
+
+
+
+<!-- Fin du contenu de la page -->
+<?php
+require_once 'includes/footer.php';
+?>
+
+
