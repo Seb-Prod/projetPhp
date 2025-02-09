@@ -91,13 +91,13 @@ if (isset($_GET["message"]) and $_GET["message"] != '') {
             <?php endif ?>
             <div class="form-group mb-1">
                 <label class="form-label" for="inputPass">Mot de passe</label>
-                <input id="inputPass" class="form-control" type="text" name="pass" required />
+                <input id="inputPass" class="form-control" type="password" name="pass" required />
             </div>
             <?php if ($newUser) : ?>
                 <!-- Confimation du mot de passe -->
                 <div class="form-group mb-1">
                     <label class="form-label" for="inputConfirmPass">Confirmer le mot de passe</label>
-                    <input id="inputConfirmPass" class="form-control" type="text" name="confirmPass" required />
+                    <input id="inputConfirmPass" class="form-control" type="password" name="confirmPass" required />
                 </div>
             <?php endif ?>
             <div class="mb-1">
