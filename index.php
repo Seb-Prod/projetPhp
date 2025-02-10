@@ -6,6 +6,21 @@ require_once 'includes/header.php';
 define('SECURE_ACCESS', true);
 require_once 'config.php';
 $pdo = getDBConnection();
+require_once 'functionFiltres'; // Fichier contenant la fonction getItem()
+$moteurs = getItem($pdo, 'moteurs'); // Récupère les moteurs
+$marques = getItem($pdo, 'marques'); // Récupère les marques
+$types = getItem($pdo, 'types'); // Récupère les types de véhicules
+
+
+$sql = "SELECT DISTINCT v.ID AS voiture_id, v.nom AS voiture_nom, v.description, v.date_sortie, 
+               m.nom AS marque_nom, p.nom AS photo_nom
+        FROM voitures v
+        INNER JOIN marques m ON v.id_marque = m.ID
+        LEFT JOIN voitures_photos vp ON v.ID = vp.id_voiture
+        LEFT JOIN photos p ON vp.id_photo = p.ID";
+$stmt = $pdo->prepare($sql);
+$stmt->execute();
+$voitures = $stmt->fetchAll();
 
 ?>
 <!<!DOCTYPE html>
@@ -25,102 +40,72 @@ $pdo = getDBConnection();
                     <h3 class="mb-0">Filtres</h3>
                 </div>
                 
-                        <div class="dropdown mt-3">
+                <div class="dropdown mt-3">
                             <button class="btn btn-secondary dropdown-toggle w-100" type="button" data-bs-toggle="dropdown">
-                                Type de véhicule
+                                Type de véhicules <span id="typeCount" class="badge bg-light text-dark">0</span>
                             </button>
                             <ul class="dropdown-menu">
-                                <li>
-                                    <label class="dropdown-item">
-                                        <input type="checkbox"> Action
-                                    </label>
-                                </li>
-                                <li>
-                                    <label class="dropdown-item">
-                                        <input type="checkbox"> Another action
-                                    </label>
-                                </li>
-                                <li>
-                                    <label class="dropdown-item">
-                                        <input type="checkbox"> Something else here
-                                    </label>
-                                </li>
+                                <?php foreach ($types as $type) { ?>
+                                    <li>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" name="types[]" class="type-checkbox" 
+                                             value="<?php echo htmlspecialchars($type); ?>"> 
+                                            <?php echo htmlspecialchars($type); ?>
+                                        </label>
+                                    </li>
+                                <?php } ?>
                             </ul>
                         </div>
                         <div class="dropdown mt-3">
-                            <button class="btn btn-secondary dropdown-toggle w-100" type="button" data-bs-toggle="dropdown">
-                                Marques
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <label class="dropdown-item">
-                                        <input type="checkbox"> Action
-                                    </label>
-                                </li>
-                                <li>
-                                    <label class="dropdown-item">
-                                        <input type="checkbox"> Another action
-                                    </label>
-                                </li>
-                                <li>
-                                    <label class="dropdown-item">
-                                        <input type="checkbox"> Something else here
-                                    </label>
-                                </li>
-                            </ul>
-                        </div>
+    <button class="btn btn-secondary dropdown-toggle w-100" type="button" data-bs-toggle="dropdown">
+        Marques <span id="marque-counter" class="badge bg-primary">0</span>
+    </button>
+    <ul class="dropdown-menu">
+        <?php foreach ($marques as $marque) { ?>
+            <li>
+                <label class="dropdown-item">
+                    <input type="checkbox" name="marques[]" value="<?php echo htmlspecialchars($marque); ?>" class="marque-checkbox"> 
+                    <?php echo htmlspecialchars($marque); ?>
+                </label>
+            </li>
+        <?php } ?>
+    </ul>
+</div>
                         <div class="dropdown mt-3">
                             <button class="btn btn-secondary dropdown-toggle w-100" type="button" data-bs-toggle="dropdown">
                                 Moteur
                             </button>
                             <ul class="dropdown-menu">
-                                <li>
-                                    <label class="dropdown-item">
-                                        <input type="checkbox"> Action
-                                    </label>
-                                </li>
-                                <li>
-                                    <label class="dropdown-item">
-                                        <input type="checkbox"> Another action
-                                    </label>
-                                </li>
-                                <li>
-                                    <label class="dropdown-item">
-                                        <input type="checkbox"> Something else here
-                                    </label>
-                                </li>
+                                <?php foreach ($moteurs as $moteur) { ?>
+                                    <li>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" name="moteurs[]" value="<?php echo htmlspecialchars($moteur); ?>"> 
+                                            <?php echo htmlspecialchars($moteur); ?>
+                                        </label>
+                                    </li>
+                                <?php } ?>
                             </ul>
                         </div>
                         <button type="submit" class="btn mt-3 w-100 btn-primary">Rechercher</button>
                 </div>
-                <div class="col-12 offset-1 col-md-7 bg-light">
+                <div class="col-12 offset-1 col-md-7 bg-light ms-0">
                     <div class="titres">
                         <h3>Les voitures</h3>
                     </div>
-                    <div class="card mt-3" style="width: w-100;">
-                        <img src="..." class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                    <?php foreach ($voitures as $voiture) { ?>
+                        <div class="card mt-3 w-100">
+                            <img src="img/<?php echo ($voiture['photo_nom'] ?? 'default.jpg'); ?>" 
+                            class="card-img-top" 
+                            alt="<?php echo ($voiture['voiture_nom']); ?>">
+                            <div class="card-body">
+                                <h5 class="card-title"><?php echo ($voiture['voiture_nom']); ?></h5>
+                                <p class="card-text"><?php echo ($voiture['description']); ?></p>
+                                <p><strong>Marque :</strong> <?php echo ($voiture['marque_nom']); ?></p>
+                                <p><strong>Date de sortie :</strong> <?php echo ($voiture['date_sortie']); ?></p>
+                                <a href="#" class="btn btn-primary">Voir plus</a>
+                            </div>
                         </div>
-                    </div>
-                    <div class="card mt-3" style="width: w-100;">
-                        <img src="..." class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
-                    <div class="card mt-3" style="width: w-100;">
-                        <img src="..." class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
-                        </div>
-                    </div>
+                    <?php } ?>
                 </div>
             </div>
         </div>
