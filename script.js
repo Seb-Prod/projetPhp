@@ -79,3 +79,46 @@
         });
     })
 })()
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    const ajouterBtn = document.getElementById('ajouter');
+    const panierList = document.getElementById('panier');
+    const totalSpan = document.getElementById('total');
+    let total = 0;
+
+    ajouterBtn.addEventListener('click', function() {
+        // Récupérer les valeurs sélectionnées
+        const couleur = document.getElementById('couleur');
+        const jantes = document.getElementById('jantes');
+        const motorisation = document.getElementById('motorisation');
+
+        const couleurSelected = couleur.options[couleur.selectedIndex];
+        const jantesSelected = jantes.options[jantes.selectedIndex];
+        const motorisationSelected = motorisation.options[motorisation.selectedIndex];
+
+        // Récupérer les prix
+        const prixCouleur = parseInt(couleurSelected.getAttribute('data-price'));
+        const prixJantes = parseInt(jantesSelected.getAttribute('data-price'));
+        const prixMotorisation = parseInt(motorisationSelected.getAttribute('data-price'));
+
+        // Calculer le total
+        total += prixCouleur + prixJantes + prixMotorisation;
+
+        // Ajouter les options au panier
+        const liCouleur = document.createElement('li');
+        liCouleur.textContent = `Couleur: ${couleurSelected.textContent}`;
+        panierList.appendChild(liCouleur);
+
+        const liJantes = document.createElement('li');
+        liJantes.textContent = `Jantes: ${jantesSelected.textContent}`;
+        panierList.appendChild(liJantes);
+
+        const liMotorisation = document.createElement('li');
+        liMotorisation.textContent = `Motorisation: ${motorisationSelected.textContent}`;
+        panierList.appendChild(liMotorisation);
+
+        // Mettre à jour le total
+        totalSpan.textContent = total;
+    });
+});
