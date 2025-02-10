@@ -41,15 +41,16 @@ $voitures = $stmt->fetchAll();
                 </div>
                 
                 <div class="dropdown mt-3">
-                            <button class="btn btn-secondary dropdown-toggle w-100" type="button" data-bs-toggle="dropdown">
-                                Type de véhicules <span id="typeCount" class="badge bg-light text-dark">0</span>
-                            </button>
+    <button class="btn btn-secondary dropdown-toggle w-100 d-flex justify-content-between align-items-center" type="button" data-bs-toggle="dropdown">
+        <span>Type de véhicules</span> <!-- Texte à gauche -->
+        <span id="type-counter" class="badge bg-light text-dark ms-auto ">0</span> <!-- Compteur à droite -->
+    </button>
                             <ul class="dropdown-menu">
                                 <?php foreach ($types as $type) { ?>
                                     <li>
                                         <label class="dropdown-item">
                                             <input type="checkbox" name="types[]" class="type-checkbox" 
-                                             value="<?php echo htmlspecialchars($type); ?>"> 
+                                             value="<?php echo htmlspecialchars($type); ?>" > 
                                             <?php echo htmlspecialchars($type); ?>
                                         </label>
                                     </li>
@@ -57,29 +58,29 @@ $voitures = $stmt->fetchAll();
                             </ul>
                         </div>
                         <div class="dropdown mt-3">
-    <button class="btn btn-secondary dropdown-toggle w-100" type="button" data-bs-toggle="dropdown">
-        Marques <span id="marque-counter" class="badge bg-primary">0</span>
-    </button>
-    <ul class="dropdown-menu">
-        <?php foreach ($marques as $marque) { ?>
-            <li>
-                <label class="dropdown-item">
-                    <input type="checkbox" name="marques[]" value="<?php echo htmlspecialchars($marque); ?>" class="marque-checkbox"> 
-                    <?php echo htmlspecialchars($marque); ?>
-                </label>
-            </li>
-        <?php } ?>
-    </ul>
-</div>
+                            <button class="btn btn-secondary dropdown-toggle w-100 d-flex justify-content-between align-items-center" type="button" data-bs-toggle="dropdown">
+                                Marques <span id="marque-counter" class="badge bg-light text-dark ms-auto">0</span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <?php foreach ($marques as $marque) { ?>
+                                    <li>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" name="marques[]" value="<?php echo htmlspecialchars($marque); ?>" class="marque-checkbox"> 
+                                            <?php echo htmlspecialchars($marque); ?>
+                                        </label>
+                                    </li>
+                                <?php } ?>
+                            </ul>
+                        </div>
                         <div class="dropdown mt-3">
-                            <button class="btn btn-secondary dropdown-toggle w-100" type="button" data-bs-toggle="dropdown">
-                                Moteur
+                            <button class="btn btn-secondary dropdown-toggle w-100 d-flex justify-content-between align-items-center" type="button" data-bs-toggle="dropdown">
+                                Moteur <span id="moteur-counter" class="badge bg-light text-dark ms-auto">0</span>
                             </button>
                             <ul class="dropdown-menu">
                                 <?php foreach ($moteurs as $moteur) { ?>
                                     <li>
                                         <label class="dropdown-item">
-                                            <input type="checkbox" name="moteurs[]" value="<?php echo htmlspecialchars($moteur); ?>"> 
+                                            <input type="checkbox" name="moteurs[]" value="<?php echo htmlspecialchars($moteur); ?>" class="moteur-checkbox"> 
                                             <?php echo htmlspecialchars($moteur); ?>
                                         </label>
                                     </li>
@@ -92,7 +93,7 @@ $voitures = $stmt->fetchAll();
                     <div class="titres">
                         <h3>Les voitures</h3>
                     </div>
-                    <?php foreach ($voitures as $voiture) { ?>
+                    <?php foreach ($voitures as $voiture) : ?>
                         <div class="card mt-3 w-100">
                             <img src="img/<?php echo ($voiture['photo_nom'] ?? 'default.jpg'); ?>" 
                             class="card-img-top" 
@@ -105,7 +106,7 @@ $voitures = $stmt->fetchAll();
                                 <a href="#" class="btn btn-primary">Voir plus</a>
                             </div>
                         </div>
-                    <?php } ?>
+                    <?php endforeach ?>
                 </div>
             </div>
         </div>
