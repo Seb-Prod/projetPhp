@@ -3,6 +3,7 @@ session_start();
 ?>
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,6 +14,7 @@ session_start();
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
     <header>
         <nav>
@@ -23,8 +25,12 @@ session_start();
                 <li>
                     <a href="logIn.php">LogIn</a>
                 </li>
+                <?php if ($_SESSION["admin"] === 1) : ?>
+                    <li>
+                        <a href="adminAdd.php">admin</a>
+                    </li>
+                <?php endif ?>
             </ul>
         </nav>
     </header>
     <main>
-

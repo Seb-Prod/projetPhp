@@ -47,10 +47,10 @@ function chargeItemBdd($item, $values)
 function initialisation()
 {
     global $types, $couleurs, $jantes, $motorisation, $marques;
-    $types = chargeItemBdd("types", ["SUV", "Breack", "Berline"]);
-    $couleurs = chargeItemBdd("couleurs", ["Rouge", "Vert", "Blanc"]);
+    $types = chargeItemBdd("types", ["SUV", "Breack", "Berline", "Roadster"]);
+    $couleurs = chargeItemBdd("couleurs", ["Rouge", "Vert", "Blanc", "Noir"]);
     $jantes = chargeItemBdd("jantes", ["16 pouces", "18 pouces", "19 pouces"]);
-    $marques = chargeItemBdd("marques", ["Nissan", "PSA", "Fiat"]);
+    $marques = chargeItemBdd("marques", ["Nissan", "Fiat"]);
     $motorisation = chargeItemBdd("moteurs", ["Essence", "Diesel", "Electrique"]);
 }
 
