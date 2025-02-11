@@ -8,10 +8,10 @@ $pdo = getDBConnection();
 try {
     $pdo = getDBConnection();
     
-    $sql = "SELECT vc.id_couleur, c.nom 
-            FROM voitures_couleurs vc
-            INNER JOIN couleurs c ON vc.id_couleur = c.id 
-            WHERE vc.id_voiture = :id_voiture";
+    $sql = "SELECT vc.id_couleur, c.nom, vc.prix 
+    FROM voitures_couleurs vc
+    INNER JOIN couleurs c ON vc.id_couleur = c.id 
+    WHERE vc.id_voiture = :id_voiture";
 
     $stmt = $pdo->prepare($sql);
     $stmt->execute(['id_voiture' => $id_voiture]);
@@ -63,7 +63,7 @@ try {
         <label for="couleur">Couleur :</label>
         <select id="couleur">
             <?php foreach($resultat as $couleur) : ?>
-                <option value="<?php echo $couleur['id_couleur']?>"><?php echo $couleur['nom']. ' prix : '?></option>
+                <option value="<?php echo $couleur['id_couleur']?>"><?php echo $couleur['nom']. ' prix : '. $couleur['prix'] . '€'?></option>
                 <?php endforeach?>
       
         </select>
