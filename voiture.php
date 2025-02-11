@@ -1,35 +1,12 @@
 <?php
 $pageTitle = "Description voiture";
 require_once 'includes/header.php';
-require_once 'includes/db.php'; // Inclure la connexion à la base de données
+define('SECURE_ACCESS', true);
+require_once 'config.php';
 
-// Empêcher l'accès direct au fichier
-if (!defined('SECURE_ACCESS')) {
-    die('Accès interdit');
-}
-
-// Configuration de la base de données
-define('DB_HOST', 'localhost'); // Adresse du serveur
-define('DB_USER', 'root');      // Nom d'utilisateur MySQL
-define('DB_PASS', ''); // Mot de passe
-define('DB_NAME', 'base_voitures');   // Nom de la base de données
-
-// Fonction pour se connecter à la base de données
-function getDBConnection() {
-    try {
-        $dsn = "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=utf8mb4";
-        $options = [
-            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
-        ];
-        return new PDO($dsn, DB_USER, DB_PASS, $options);
-    } catch (PDOException $e) {
-        header("Location:index.php");
-        exit();
-        //die("Erreur de connexion : " . $e->getMessage());
-    }
-}
+$pdo = getDBConnection();
 ?>
+
 
 <div class="container">
     <article class="colonne">
@@ -115,6 +92,28 @@ function getDBConnection() {
             tourner les têtes et à offrir des sensations inégalées.
         </p>
         <p>📍 Disponible immédiatement – Contactez-nous pour plus d’informations ou pour un essai ! 🚗💨</p>
+
+        <div class="avis-section">
+        <h2>Avis clients</h2>
+
+    <!-- Formulaire d'ajout d'avis -->
+    <form action="ajouter_avis.php" method="POST">
+        <input type="text" name="nom" placeholder="Votre nom" required>
+        <textarea name="commentaire" placeholder="Votre commentaire" required></textarea>
+        <select name="note" required>
+            <?php for($i = 1; $i <= 5; $i++): ?>
+                <option value="<?= $i ?>"><?= $i ?> étoiles</option>
+            <?php endfor; ?>
+        </select>
+        <button type="submit">Publier l'avis</button>
+    </form>
+    
+            </div>
+
+<?php
+require_once 'includes/db.php';
+?>
+
 <script src="script.js"></script>
 
 <?php
