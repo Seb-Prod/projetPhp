@@ -3,8 +3,31 @@ $pageTitle = "Description voiture";
 require_once 'includes/header.php';
 define('SECURE_ACCESS', true);
 require_once 'config.php';
-
+$id_voiture = 4; //Remplacé par un get lié sur la page de Moussa
 $pdo = getDBConnection();
+try {
+    $pdo = getDBConnection();
+    
+    $sql = "SELECT vc.id_couleur, c.nom 
+            FROM voitures_couleurs vc
+            INNER JOIN couleurs c ON vc.id_couleur = c.id 
+            WHERE vc.id_voiture = :id_voiture";
+
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute(['id_voiture' => $id_voiture]);
+
+    $resultat = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    if (!empty($resultat)) {
+        echo "Données récupérées avec succès :";
+        print_r($resultat);
+    } else {
+        echo "Aucun résultat trouvé.";
+    }
+
+} catch (PDOException $e) {
+    echo "Erreur SQL : " . $e->getMessage();
+}
 ?>
 
 
@@ -27,7 +50,9 @@ $pdo = getDBConnection();
                 <button id="prev">Précédent</button>
                 <button id="next">Suivant</button>
             </div>
-            <div class="carousel-dots"></div>
+            <div class="carousel-dots">
+                <span class="dot active"></span>
+            </div>
         </div>
     </article>
     <article class="colonne">
@@ -37,11 +62,10 @@ $pdo = getDBConnection();
         
         <label for="couleur">Couleur :</label>
         <select id="couleur">
-            <option value="Rouge" data-price="500">Rouge (+500€)</option>
-            <option value="Noir" data-price="600">Noir (+600€)</option>
-            <option value="Blanc" data-price="400">Blanc (+400€)</option>
-            <option value="Bleu" data-price="550">Bleu (+550€)</option>
-            <option value="Gris" data-price="450">Gris (+450€)</option>
+            <?php foreach($resultat as $couleur) : ?>
+                <option value="<?php echo $couleur['id_couleur']?>"><?php echo $couleur['nom']. ' prix : '?></option>
+                <?php endforeach?>
+      
         </select>
         
         <label for="jantes">Jantes :</label>
@@ -111,7 +135,7 @@ $pdo = getDBConnection();
             </div>
 
 <?php
-require_once 'includes/db.php';
+//require_once 'includes/db.php';
 ?>
 
 <script src="script.js"></script>
