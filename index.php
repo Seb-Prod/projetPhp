@@ -34,116 +34,119 @@ $marquesSelectionnees = $_GET['marques'] ?? [];
 $moteursSelectionnes = $_GET['moteurs'] ?? [];
 
 // Filtrer les voitures
-$voituresFiltrees = array_filter($voitures, function($voiture) use ($typesSelectionnes, $marquesSelectionnees, $moteursSelectionnes) {
+$voituresFiltrees = array_filter($voitures, function ($voiture) use ($typesSelectionnes, $marquesSelectionnees, $moteursSelectionnes) {
     $typeMatch = empty($typesSelectionnes) || (isset($voiture['type_nom']) && in_array($voiture['type_nom'], $typesSelectionnes));
     $marqueMatch = empty($marquesSelectionnees) || (isset($voiture['marque_nom']) && in_array($voiture['marque_nom'], $marquesSelectionnees));
     $moteurMatch = empty($moteursSelectionnes) || (isset($voiture['moteur_nom']) && in_array($voiture['moteur_nom'], $moteursSelectionnes));
 
     return $typeMatch && $marqueMatch && $moteurMatch;
 });
-
-
-?>
+// echo '<pre>';
+// var_dump($_GET);
+// echo '</pre>';
+// ?>
 <!<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-<section class="my-5" id="">
-        <div class ="container">
-            <div class="row gy-4 gy-md-0 ">
-                <div class="col-12 col-md-4 bg-light"  >
-                <div class="titre mt-0 d-flex align-items-center">
-                    <i class="bi bi-filter-square me-2"></i>
-                    <h3 class="mb-0">Filtres</h3>
-                </div>
-                <form method="GET" action="index.php">
-                <div class="dropdown mt-3">
-    <button class="btn btn-secondary dropdown-toggle w-100 d-flex justify-content-between align-items-center" type="button" data-bs-toggle="dropdown">
-        <span>Type de véhicules</span> <!-- Texte à gauche -->
-        <span id="type-counter" class="badge bg-light text-dark ms-auto ">0</span> <!-- Compteur à droite -->
-    </button>
-                            <ul class="dropdown-menu">
-                                <?php foreach ($types as $type) { ?>
-                                    <li>
-                                        <label class="dropdown-item">
-                                            <input type="checkbox" name="types[]" class="type-checkbox" 
-                                             value="<?php echo htmlspecialchars($type); ?>" > 
-                                            <?php echo htmlspecialchars($type); ?>
-                                        </label>
-                                    </li>
-                                <?php } ?>
-                            </ul>
+    <html lang="fr">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+
+    <body>
+        <section class="my-5" id="">
+            <div class="container">
+                <div class="row gy-4 gy-md-0 ">
+                    <div class="col-12 col-md-4 bg-light">
+                        <div class="titre mt-0 d-flex align-items-center">
+                            <i class="bi bi-filter-square me-2"></i>
+                            <h3 class="mb-0">Filtres</h3>
                         </div>
-                        <div class="dropdown mt-3">
-                            <button class="btn btn-secondary dropdown-toggle w-100 d-flex justify-content-between align-items-center" type="button" data-bs-toggle="dropdown">
-                                Marques <span id="marque-counter" class="badge bg-light text-dark ms-auto">0</span>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <?php foreach ($marques as $marque) { ?>
-                                    <li>
-                                        <label class="dropdown-item">
-                                            <input type="checkbox" name="marques[]" value="<?php echo htmlspecialchars($marque); ?>" class="marque-checkbox"> 
-                                            <?php echo htmlspecialchars($marque); ?>
-                                        </label>
-                                    </li>
-                                <?php } ?>
-                            </ul>
-                        </div>
-                        <div class="dropdown mt-3">
-                            <button class="btn btn-secondary dropdown-toggle w-100 d-flex justify-content-between align-items-center" type="button" data-bs-toggle="dropdown">
-                                Moteur <span id="moteur-counter" class="badge bg-light text-dark ms-auto">0</span>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <?php foreach ($moteurs as $moteur) { ?>
-                                    <li>
-                                        <label class="dropdown-item">
-                                            <input type="checkbox" name="moteurs[]" value="<?php echo htmlspecialchars($moteur); ?>" class="moteur-checkbox"> 
-                                            <?php echo htmlspecialchars($moteur); ?>
-                                        </label>
-                                    </li>
-                                <?php } ?>
-                            </ul>
-                        </div>
-                        <button type="submit" class="btn mt-3 w-100 btn-primary">Rechercher</button>
-                    </form>
-                </div>
-                <div class="col-12 offset-1 col-md-7 bg-light ms-0">
-                    <div class="titres">
-                        <h3>Les voitures</h3>
+                        <form method="GET" action="index.php">
+                            <div class="dropdown mt-3">
+                                <button class="btn btn-secondary dropdown-toggle w-100 d-flex justify-content-between align-items-center" type="button" data-bs-toggle="dropdown">
+                                    <span>Type de véhicules</span> <!-- Texte à gauche -->
+                                    <span id="type-counter" class="badge bg-light text-dark ms-auto ">0</span> <!-- Compteur à droite -->
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <?php foreach ($types as $type) : ?>
+                                        <li>
+                                            <label class="dropdown-item">
+                                                <input type="checkbox" name="types[]" class="type-checkbox"
+                                                    value="<?php echo htmlspecialchars($type); ?>">
+                                                <?php echo htmlspecialchars($type); ?>
+                                            </label>
+                                        </li>
+                                    <?php endforeach ?>
+                                </ul>
+                            </div>
+                            <div class="dropdown mt-3">
+                                <button class="btn btn-secondary dropdown-toggle w-100 d-flex justify-content-between align-items-center" type="button" data-bs-toggle="dropdown">
+                                    Marques <span id="marque-counter" class="badge bg-light text-dark ms-auto">0</span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <?php foreach ($marques as $marque) { ?>
+                                        <li>
+                                            <label class="dropdown-item">
+                                                <input type="checkbox" name="marques[]" value="<?php echo htmlspecialchars($marque); ?>" class="marque-checkbox">
+                                                <?php echo htmlspecialchars($marque); ?>
+                                            </label>
+                                        </li>
+                                    <?php } ?>
+                                </ul>
+                            </div>
+                            <div class="dropdown mt-3">
+                                <button class="btn btn-secondary dropdown-toggle w-100 d-flex justify-content-between align-items-center" type="button" data-bs-toggle="dropdown">
+                                    Moteur <span id="moteur-counter" class="badge bg-light text-dark ms-auto">0</span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <?php foreach ($moteurs as $moteur) { ?>
+                                        <li>
+                                            <label class="dropdown-item">
+                                                <input type="checkbox" name="moteurs[]" value="<?php echo htmlspecialchars($moteur); ?>" class="moteur-checkbox">
+                                                <?php echo htmlspecialchars($moteur); ?>
+                                            </label>
+                                        </li>
+                                    <?php } ?>
+                                </ul>
+                            </div>
+                            <button type="submit" class="btn mt-3 w-100 btn-primary">Rechercher</button>
+                        </form>
                     </div>
-                    <?php foreach ($voituresFiltrees as $voiture) : ?>
-        <div class="car-item card mt-3 w-100"
-            data-type="<?php echo htmlspecialchars($voiture['type_nom'] ?? ''); ?>"
-            data-marque="<?php echo htmlspecialchars($voiture['marque_nom'] ?? ''); ?>"
-            data-moteur="<?php echo htmlspecialchars($voiture['moteur_nom'] ?? ''); ?>">
-            <img src="img/<?php echo htmlspecialchars($voiture['photo_nom'] ?? 'default.jpg'); ?>" 
-                class="card-img-top" 
-                alt="<?php echo htmlspecialchars($voiture['voiture_nom'] ?? ''); ?>">
-            <div class="card-body">
-                <h5 class="card-title"><?php echo htmlspecialchars($voiture['voiture_nom'] ?? ''); ?></h5>
-                <p class="card-text"><?php echo htmlspecialchars($voiture['description'] ?? ''); ?></p>
-                <p><strong>Marque :</strong> <?php echo htmlspecialchars($voiture['marque_nom'] ?? ''); ?></p>
-                <p><strong>Date de sortie :</strong> <?php echo htmlspecialchars($voiture['date_sortie'] ?? ''); ?></p>
-                <!-- <a href="exemple.php?idVoiture=<?php echo $voiture['voiture_id']?>" class="btn btn-primary">Voir plus</a> -->
-            </div>
-        </div>
-    <?php endforeach; ?>
+                    <div class="col-12 offset-1 col-md-7 bg-light ms-0">
+                        <div class="titres">
+                            <h3>Les voitures</h3>
+                        </div>
+                        <?php foreach ($voituresFiltrees as $voiture) : ?>
+                            <div class="car-item card mt-3 w-100"
+                                data-type="<?php echo htmlspecialchars($voiture['type_nom'] ?? ''); ?>"
+                                data-marque="<?php echo htmlspecialchars($voiture['marque_nom'] ?? ''); ?>"
+                                data-moteur="<?php echo htmlspecialchars($voiture['moteur_nom'] ?? ''); ?>">
+                                <img src="img/<?php echo htmlspecialchars($voiture['photo_nom'] ?? 'default.jpg'); ?>"
+                                    class="card-img-top"
+                                    alt="<?php echo htmlspecialchars($voiture['voiture_nom'] ?? ''); ?>">
+                                <div class="card-body">
+                                    <h5 class="card-title"><?php echo htmlspecialchars($voiture['voiture_nom'] ?? ''); ?></h5>
+                                    <p class="card-text"><?php echo htmlspecialchars($voiture['description'] ?? ''); ?></p>
+                                    <p><strong>Marque :</strong> <?php echo htmlspecialchars($voiture['marque_nom'] ?? ''); ?></p>
+                                    <p><strong>Date de sortie :</strong> <?php echo htmlspecialchars($voiture['date_sortie'] ?? ''); ?></p>
+                                    <!-- <a href="exemple.php?idVoiture=<?php echo $voiture['voiture_id'] ?>" class="btn btn-primary">Voir plus</a> -->
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
                 </div>
             </div>
-        </div>
-            
-    </section>
-</body>
-</html>
+
+        </section>
+    </body>
+
+    </html>
 
 
 
-<!-- Fin du contenu de la page -->
-<?php
-require_once 'includes/footer.php';
-?>
-
+    <!-- Fin du contenu de la page -->
+    <?php
+    require_once 'includes/footer.php';
+    ?>
