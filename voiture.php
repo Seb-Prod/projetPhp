@@ -30,6 +30,7 @@ try {
 }
 ?>
 
+<div id="pageVoiture">
 
 <div class="container">
     <article class="colonne">
@@ -133,7 +134,7 @@ try {
     </form>
     
             </div>
-
+            </div>
 <?php
 //require_once 'includes/db.php';
 ?>

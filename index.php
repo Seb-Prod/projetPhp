@@ -131,7 +131,7 @@ $voituresFiltrees = array_filter($voitures, function ($voiture) use ($typesSelec
                                     <p class="card-text"><?php echo htmlspecialchars($voiture['description'] ?? ''); ?></p>
                                     <p><strong>Marque :</strong> <?php echo htmlspecialchars($voiture['marque_nom'] ?? ''); ?></p>
                                     <p><strong>Date de sortie :</strong> <?php echo htmlspecialchars($voiture['date_sortie'] ?? ''); ?></p>
-                                    <!-- <a href="exemple.php?idVoiture=<?php echo $voiture['voiture_id'] ?>" class="btn btn-primary">Voir plus</a> -->
+                                    <a href="voiture.php?idVoiture=<?php echo $voiture['voiture_id'] ?>" class="btn btn-primary">Voir plus</a>
                                 </div>
                             </div>
                         <?php endforeach; ?>
@@ -139,7 +139,7 @@ $voituresFiltrees = array_filter($voitures, function ($voiture) use ($typesSelec
                 </div>
             </div>
 
-        </section>
+        </section>  
     </body>
 
     </html>
