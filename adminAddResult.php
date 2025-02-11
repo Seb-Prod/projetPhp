@@ -21,6 +21,14 @@ $prixCouleurs = [];
 $jantes = [];
 $prixJantes = [];
 
+$upload_dir = "img2/";
+$max_file_size = 5 * 1024 * 1024; // 5 MB
+$allowed_types = ['image/jpeg', 'image/png', 'image/webp'];
+
+if (!file_exists($upload_dir)) {
+    mkdir($upload_dir, 0777, true);
+}
+
 // Champs attendu
 $requiredFields = ['model', 'marque', 'type', 'date', 'description', 'motorisation', 'prixMotorisation', 'couleur', 'prixCouleur', 'jante', 'prixJante'];
 // Affectation des valeurs
@@ -53,7 +61,6 @@ function checkRequiredFields($requiredFields)
 
 if ($requiredFields) {
     setValues();
-    varDump($_POST);
     $message = ajoutVoiture($pdo, $model, $type, $marque, $description, $date);
     if($message['sucess']){
         $idVoiture = intval($message['value']);
@@ -70,10 +77,71 @@ if ($requiredFields) {
             ajoutOptionVoiture($pdo, 'voitures_jantes', $idVoiture, 'id_jante', $key, $prixJantes[$key]);
         }
     }
+}
+varDump($_POST);
+echo "ok";
+
+
+
+// Fonction de validation et upload d'image
+function handleImageUpload($file, $upload_dir) {
+    global $max_file_size, $allowed_types;
     
+    if ($file['error'] !== UPLOAD_ERR_OK) {
+        return ['success' => false, 'error' => 'Erreur lors du téléversement'];
+    }
+    
+    if ($file['size'] > $max_file_size) {
+        return ['success' => false, 'error' => 'Fichier trop volumineux'];
+    }
+    
+    $finfo = finfo_open(FILEINFO_MIME_TYPE);
+    $mime_type = finfo_file($finfo, $file['tmp_name']);
+    finfo_close($finfo);
+    
+    if (!in_array($mime_type, $allowed_types)) {
+        return ['success' => false, 'error' => 'Type de fichier non autorisé'];
+    }
+    
+    $filename = time() . '_' . basename($file['name']);
+    $filepath = $upload_dir . $filename;
+    
+    if (move_uploaded_file($file['tmp_name'], $filepath)) {
+        return ['success' => true, 'path' => $filepath];
+    }
+    
+    return ['success' => false, 'error' => 'Erreur lors de la sauvegarde'];
 }
 
+// Traitement de l'image principale
+if (isset($_FILES['imageAccueil'])) {
+    $result = handleImageUpload($_FILES['imageAccueil'], $upload_dir);
+    if (!$result['success']) {
+        die($result['error']);
+    }
+    $main_image_path = $result['path'];
+}
 
+// Traitement des images de galerie
+$gallery_images = [];
+if (isset($_FILES['imagesGalerie'])) {
+    foreach ($_FILES['imagesGalerie']['tmp_name'] as $key => $tmp_name) {
+        if ($_FILES['imagesGalerie']['error'][$key] === UPLOAD_ERR_OK) {
+            $file = [
+                'name' => $_FILES['imagesGalerie']['name'][$key],
+                'type' => $_FILES['imagesGalerie']['type'][$key],
+                'tmp_name' => $tmp_name,
+                'error' => $_FILES['imagesGalerie']['error'][$key],
+                'size' => $_FILES['imagesGalerie']['size'][$key]
+            ];
+            
+            $result = handleImageUpload($file, $upload_dir);
+            if ($result['success']) {
+                $gallery_images[] = $result['path'];
+            }
+        }
+    }
+}
 
 
 function varDump($var){
