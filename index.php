@@ -13,14 +13,35 @@ $types = getItem($pdo, 'types'); // Récupère les types de véhicules
 
 
 $sql = "SELECT DISTINCT v.ID AS voiture_id, v.nom AS voiture_nom, v.description, v.date_sortie, 
-               m.nom AS marque_nom, p.nom AS photo_nom
-        FROM voitures v
-        INNER JOIN marques m ON v.id_marque = m.ID
-        LEFT JOIN voitures_photos vp ON v.ID = vp.id_voiture
-        LEFT JOIN photos p ON vp.id_photo = p.ID";
+       m.nom AS marque_nom, t.nom AS type_nom, mo.nom AS moteur_nom, p.nom AS photo_nom
+FROM voitures v
+INNER JOIN marques m ON v.id_marque = m.ID
+INNER JOIN types t ON v.id_type = t.ID
+INNER JOIN voitures_moteurs vm ON v.ID = vm.id_voiture
+INNER JOIN moteurs mo ON vm.id_moteur = mo.ID
+LEFT JOIN voitures_photos vp ON v.ID = vp.id_voiture
+LEFT JOIN photos p ON vp.id_photo = p.ID";
+
+
 $stmt = $pdo->prepare($sql);
 $stmt->execute();
 $voitures = $stmt->fetchAll();
+// echo '<pre>';
+// var_dump($voitures);
+// echo '</pre>';
+$typesSelectionnes = $_GET['types'] ?? [];
+$marquesSelectionnees = $_GET['marques'] ?? [];
+$moteursSelectionnes = $_GET['moteurs'] ?? [];
+
+// Filtrer les voitures
+$voituresFiltrees = array_filter($voitures, function($voiture) use ($typesSelectionnes, $marquesSelectionnees, $moteursSelectionnes) {
+    $typeMatch = empty($typesSelectionnes) || (isset($voiture['type_nom']) && in_array($voiture['type_nom'], $typesSelectionnes));
+    $marqueMatch = empty($marquesSelectionnees) || (isset($voiture['marque_nom']) && in_array($voiture['marque_nom'], $marquesSelectionnees));
+    $moteurMatch = empty($moteursSelectionnes) || (isset($voiture['moteur_nom']) && in_array($voiture['moteur_nom'], $moteursSelectionnes));
+
+    return $typeMatch && $marqueMatch && $moteurMatch;
+});
+
 
 ?>
 <!<!DOCTYPE html>
@@ -39,7 +60,7 @@ $voitures = $stmt->fetchAll();
                     <i class="bi bi-filter-square me-2"></i>
                     <h3 class="mb-0">Filtres</h3>
                 </div>
-                
+                <form method="GET" action="index.php">
                 <div class="dropdown mt-3">
     <button class="btn btn-secondary dropdown-toggle w-100 d-flex justify-content-between align-items-center" type="button" data-bs-toggle="dropdown">
         <span>Type de véhicules</span> <!-- Texte à gauche -->
@@ -88,25 +109,29 @@ $voitures = $stmt->fetchAll();
                             </ul>
                         </div>
                         <button type="submit" class="btn mt-3 w-100 btn-primary">Rechercher</button>
+                    </form>
                 </div>
                 <div class="col-12 offset-1 col-md-7 bg-light ms-0">
                     <div class="titres">
                         <h3>Les voitures</h3>
                     </div>
-                    <?php foreach ($voitures as $voiture) : ?>
-                        <div class="card mt-3 w-100">
-                            <img src="img/<?php echo ($voiture['photo_nom'] ?? 'default.jpg'); ?>" 
-                            class="card-img-top" 
-                            alt="<?php echo ($voiture['voiture_nom']); ?>">
-                            <div class="card-body">
-                                <h5 class="card-title"><?php echo ($voiture['voiture_nom']); ?></h5>
-                                <p class="card-text"><?php echo ($voiture['description']); ?></p>
-                                <p><strong>Marque :</strong> <?php echo ($voiture['marque_nom']); ?></p>
-                                <p><strong>Date de sortie :</strong> <?php echo ($voiture['date_sortie']); ?></p>
-                                <a href="#" class="btn btn-primary">Voir plus</a>
-                            </div>
-                        </div>
-                    <?php endforeach ?>
+                    <?php foreach ($voituresFiltrees as $voiture) : ?>
+        <div class="car-item card mt-3 w-100"
+            data-type="<?php echo htmlspecialchars($voiture['type_nom'] ?? ''); ?>"
+            data-marque="<?php echo htmlspecialchars($voiture['marque_nom'] ?? ''); ?>"
+            data-moteur="<?php echo htmlspecialchars($voiture['moteur_nom'] ?? ''); ?>">
+            <img src="img/<?php echo htmlspecialchars($voiture['photo_nom'] ?? 'default.jpg'); ?>" 
+                class="card-img-top" 
+                alt="<?php echo htmlspecialchars($voiture['voiture_nom'] ?? ''); ?>">
+            <div class="card-body">
+                <h5 class="card-title"><?php echo htmlspecialchars($voiture['voiture_nom'] ?? ''); ?></h5>
+                <p class="card-text"><?php echo htmlspecialchars($voiture['description'] ?? ''); ?></p>
+                <p><strong>Marque :</strong> <?php echo htmlspecialchars($voiture['marque_nom'] ?? ''); ?></p>
+                <p><strong>Date de sortie :</strong> <?php echo htmlspecialchars($voiture['date_sortie'] ?? ''); ?></p>
+                <!-- <a href="exemple.php?idVoiture=<?php echo $voiture['voiture_id']?>" class="btn btn-primary">Voir plus</a> -->
+            </div>
+        </div>
+    <?php endforeach; ?>
                 </div>
             </div>
         </div>
@@ -121,5 +146,4 @@ $voitures = $stmt->fetchAll();
 <?php
 require_once 'includes/footer.php';
 ?>
-
 
