@@ -160,3 +160,29 @@
 #panier li {
     margin-bottom: 10px;
 }
+
+
+
+
+/* Mode sombre */
+.dark-mode {
+    background-color: #121212;
+    color: #ffffff;
+}
+
+/* Style du bouton */
+#darkModeToggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+#darkModeToggle:hover {
+    background-color: #333;
+}

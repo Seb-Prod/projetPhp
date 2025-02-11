@@ -122,3 +122,30 @@ document.addEventListener('DOMContentLoaded', function() {
         totalSpan.textContent = total;
     });
 });
+
+
+//Dark Mode 
+
+document.addEventListener("DOMContentLoaded", function () {
+    const toggleButton = document.getElementById("darkModeToggle");
+    const body = document.body;
+
+    // Vérifier si le mode sombre est activé (stocké dans localStorage)
+    if (localStorage.getItem("darkMode") === "enabled") {
+        body.classList.add("dark-mode");
+        toggleButton.textContent = "☀️ Mode Clair";
+    }
+
+    // Basculer le mode sombre/clair au clic
+    toggleButton.addEventListener("click", function () {
+        body.classList.toggle("dark-mode");
+
+        if (body.classList.contains("dark-mode")) {
+            localStorage.setItem("darkMode", "enabled");
+            toggleButton.textContent = "☀️ Mode Clair";
+        } else {
+            localStorage.setItem("darkMode", "disabled");
+            toggleButton.textContent = "🌙 Mode Sombre";
+        }
+    });
+});

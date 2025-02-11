@@ -22,6 +22,7 @@ session_start();
             <ul>
                 <li>
                     <a href="index.php">Accueil</a>
+                    <button id="darkModeToggle">🌙 Mode Sombre</button>
                 </li>
                 <li>
                     <a href="logIn.php">LogIn</a>
@@ -34,4 +35,6 @@ session_start();
             </ul>
         </nav>
     </header>
+    <script src="script.js"></script>
     <main>
+ 
