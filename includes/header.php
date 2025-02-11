@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -17,6 +20,9 @@
             <ul>
                 <li>
                     <a href="index.php">Accueil</a>
+                </li>
+                <li>
+                    <a href="logIn.php">LogIn</a>
                 </li>
             </ul>
         </nav>
