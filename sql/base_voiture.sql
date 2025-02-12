@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost
--- Généré le : mar. 11 fév. 2025 à 14:18
+-- Généré le : mer. 12 fév. 2025 à 09:09
 -- Version du serveur : 10.4.28-MariaDB
 -- Version de PHP : 8.2.4
 
@@ -122,8 +122,17 @@ INSERT INTO `moteurs` (`ID`, `nom`) VALUES
 
 CREATE TABLE `photos` (
   `ID` int(11) NOT NULL,
-  `nom` varchar(30) DEFAULT NULL
+  `nom` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `photos`
+--
+
+INSERT INTO `photos` (`ID`, `nom`) VALUES
+(4, 'image_67ac54d1e47ff0.10198538.jpg'),
+(5, 'image_67ac54d1e4c520.69692613.jpg'),
+(6, 'image_67ac55218e13b0.10178956.jpg');
 
 -- --------------------------------------------------------
 
@@ -189,8 +198,8 @@ CREATE TABLE `voitures` (
 --
 
 INSERT INTO `voitures` (`ID`, `nom`, `id_type`, `id_marque`, `description`, `date_sortie`) VALUES
-(61, 'Aryia', 19, 5, '', '2025-01-27'),
-(62, '500', 21, 6, '', '2025-01-06');
+(108, 'Ariya', 19, 5, 'La petite dernière de chez Nissan', '2025-01-27'),
+(109, '500', 21, 6, '', '2025-02-01');
 
 -- --------------------------------------------------------
 
@@ -204,18 +213,6 @@ CREATE TABLE `voitures_couleurs` (
   `id_couleur` int(11) NOT NULL,
   `prix` decimal(10,0) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Déchargement des données de la table `voitures_couleurs`
---
-
-INSERT INTO `voitures_couleurs` (`id`, `id_voiture`, `id_couleur`, `prix`) VALUES
-(3, 61, 6, 0),
-(4, 61, 8, 1000),
-(5, 61, 7, 500),
-(6, 62, 6, 0),
-(7, 62, 8, 0),
-(8, 62, 7, 0);
 
 -- --------------------------------------------------------
 
@@ -235,10 +232,10 @@ CREATE TABLE `voitures_jantes` (
 --
 
 INSERT INTO `voitures_jantes` (`id`, `id_voiture`, `id_jante`, `prix`) VALUES
-(2, 61, 6, 500),
-(3, 61, 5, 0),
-(4, 62, 4, 200),
-(5, 62, 5, 500);
+(12, 108, 6, 1000),
+(13, 108, 5, 0),
+(14, 109, 4, 0),
+(15, 109, 6, 160);
 
 -- --------------------------------------------------------
 
@@ -258,9 +255,9 @@ CREATE TABLE `voitures_moteurs` (
 --
 
 INSERT INTO `voitures_moteurs` (`ID`, `id_voiture`, `id_moteur`, `prix`) VALUES
-(12, 61, 9, 45000),
-(13, 62, 7, 35000),
-(14, 62, 9, 45000);
+(33, 108, 9, 45000),
+(34, 109, 7, 15000),
+(35, 109, 8, 20000);
 
 -- --------------------------------------------------------
 
@@ -273,6 +270,15 @@ CREATE TABLE `voitures_photos` (
   `id_voiture` int(11) NOT NULL,
   `id_photo` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `voitures_photos`
+--
+
+INSERT INTO `voitures_photos` (`id`, `id_voiture`, `id_photo`) VALUES
+(2, 108, 4),
+(3, 108, 5),
+(4, 109, 6);
 
 --
 -- Index pour les tables déchargées
@@ -406,7 +412,7 @@ ALTER TABLE `moteurs`
 -- AUTO_INCREMENT pour la table `photos`
 --
 ALTER TABLE `photos`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT pour la table `types`
@@ -424,31 +430,31 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT pour la table `voitures`
 --
 ALTER TABLE `voitures`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110;
 
 --
 -- AUTO_INCREMENT pour la table `voitures_couleurs`
 --
 ALTER TABLE `voitures_couleurs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT pour la table `voitures_jantes`
 --
 ALTER TABLE `voitures_jantes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT pour la table `voitures_moteurs`
 --
 ALTER TABLE `voitures_moteurs`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT pour la table `voitures_photos`
 --
 ALTER TABLE `voitures_photos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Contraintes pour les tables déchargées
@@ -472,29 +478,29 @@ ALTER TABLE `voitures`
 -- Contraintes pour la table `voitures_couleurs`
 --
 ALTER TABLE `voitures_couleurs`
-  ADD CONSTRAINT `voitures_couleurs_ibfk_1` FOREIGN KEY (`id_couleur`) REFERENCES `couleurs` (`ID`),
-  ADD CONSTRAINT `voitures_couleurs_ibfk_2` FOREIGN KEY (`id_voiture`) REFERENCES `voitures` (`ID`);
+  ADD CONSTRAINT `voitures_couleurs_ibfk_1` FOREIGN KEY (`id_couleur`) REFERENCES `couleurs` (`ID`) ON DELETE CASCADE,
+  ADD CONSTRAINT `voitures_couleurs_ibfk_2` FOREIGN KEY (`id_voiture`) REFERENCES `voitures` (`ID`) ON DELETE CASCADE;
 
 --
 -- Contraintes pour la table `voitures_jantes`
 --
 ALTER TABLE `voitures_jantes`
-  ADD CONSTRAINT `voitures_jantes_ibfk_1` FOREIGN KEY (`id_jante`) REFERENCES `jantes` (`ID`),
-  ADD CONSTRAINT `voitures_jantes_ibfk_2` FOREIGN KEY (`id_voiture`) REFERENCES `voitures` (`ID`);
+  ADD CONSTRAINT `voitures_jantes_ibfk_1` FOREIGN KEY (`id_jante`) REFERENCES `jantes` (`ID`) ON DELETE CASCADE,
+  ADD CONSTRAINT `voitures_jantes_ibfk_2` FOREIGN KEY (`id_voiture`) REFERENCES `voitures` (`ID`) ON DELETE CASCADE;
 
 --
 -- Contraintes pour la table `voitures_moteurs`
 --
 ALTER TABLE `voitures_moteurs`
-  ADD CONSTRAINT `voitures_moteurs_ibfk_1` FOREIGN KEY (`id_moteur`) REFERENCES `moteurs` (`ID`),
-  ADD CONSTRAINT `voitures_moteurs_ibfk_2` FOREIGN KEY (`id_voiture`) REFERENCES `voitures` (`ID`);
+  ADD CONSTRAINT `voitures_moteurs_ibfk_1` FOREIGN KEY (`id_moteur`) REFERENCES `moteurs` (`ID`) ON DELETE CASCADE,
+  ADD CONSTRAINT `voitures_moteurs_ibfk_2` FOREIGN KEY (`id_voiture`) REFERENCES `voitures` (`ID`) ON DELETE CASCADE;
 
 --
 -- Contraintes pour la table `voitures_photos`
 --
 ALTER TABLE `voitures_photos`
-  ADD CONSTRAINT `voitures_photos_ibfk_1` FOREIGN KEY (`id_photo`) REFERENCES `photos` (`ID`),
-  ADD CONSTRAINT `voitures_photos_ibfk_2` FOREIGN KEY (`id_voiture`) REFERENCES `voitures` (`ID`);
+  ADD CONSTRAINT `voitures_photos_ibfk_1` FOREIGN KEY (`id_photo`) REFERENCES `photos` (`ID`) ON DELETE CASCADE,
+  ADD CONSTRAINT `voitures_photos_ibfk_2` FOREIGN KEY (`id_voiture`) REFERENCES `voitures` (`ID`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

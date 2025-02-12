@@ -1,5 +1,6 @@
 <?php
 // Inportation du header
+$pageTitle  = "Ajout de nouveaux model";
 require_once 'includes/header.php';
 
 
@@ -58,7 +59,7 @@ initialisation();
 
 ?>
 <!-- Début du contenu de la page -->
-<form action="adminAddResult.php" method="post">
+<form action="adminAddResult.php" method="post" enctype="multipart/form-data">
     <div class="card container p-3">
         <h5 class="card-title">Ajout d'un nouveau Model</h5>
         <div class="row">
@@ -100,10 +101,22 @@ initialisation();
                 <div class="form-group mb-2">
                     <label class="form-label" for="inputDescription">Description</label>
                     <textarea class="form-control" name="description" id="inputDescription"></textarea>
-
                 </div>
             </div>
         </div>
+        <!-- ajout des photos -->
+        <div class="row">
+            <div class="col">
+                <div class="card container p-3">
+                    <h6 class="card-title">Images du véhicule</h6>
+                    <div class="mb-3">
+                        <input type="file" class="form-control" name="imagesGalerie[]" id="imagesGalerie"
+                            accept="image/jpeg,image/png,image/webp" multiple>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
         <div class="row">
             <div class="col">
                 <div class="card container p-3">
@@ -159,7 +172,9 @@ initialisation();
                 <button type="submit" class="btn btn-primary">Valider</button>
             </div>
         </div>
-    </div>
+
+
+        
 
 
 </form>
