@@ -1,5 +1,22 @@
 <?php
 session_start();
+$admin = false;
+if (isset($_SESSION['admin']) and $_SESSION["admin"] === 1) {
+    $admin = true;
+} else {
+    $admin = false;
+}
+
+if(isset($_SESSION['nom']) and $_SESSION['nom'] != ""){
+    $lien = "logOut.php";
+    $txt = "LogOut";
+}else{
+    $lien = "logIn.php";
+    $txt = 'LogIn';
+}
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -32,11 +49,11 @@ session_start();
                     <a class="nav-link" href="index.php">Accueil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="logIn.php">LogIn</a>
+                    <a class="nav-link" href="<?php echo $lien ?>"><?php echo $txt ?></a>
                 </li>
-                <?php if ($_SESSION["admin"] === 1) : ?>
+                <?php if ($admin):?>
                     <li class="nav-item">
-                        <a class="nav-link" href="adminAdd.php">Admin</a>
+                        <a class="nav-link" href="admin.php">Admin</a>
                     </li>
                 <?php endif ?>
             </ul>

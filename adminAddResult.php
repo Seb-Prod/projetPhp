@@ -60,8 +60,8 @@ function addNewCar()
             addImages($idVoiture);
         }
     }
-    //header("Location:adminAdd.php");
-    //exit();
+    header("Location:adminAdd.php");
+    exit();
 }
 
 // Ajout des options
