@@ -101,10 +101,22 @@ initialisation();
                 <div class="form-group mb-2">
                     <label class="form-label" for="inputDescription">Description</label>
                     <textarea class="form-control" name="description" id="inputDescription"></textarea>
-
                 </div>
             </div>
         </div>
+        <!-- ajout des photos -->
+        <div class="row">
+            <div class="col">
+                <div class="card container p-3">
+                    <h6 class="card-title">Images du véhicule</h6>
+                    <div class="mb-3">
+                        <input type="file" class="form-control" name="imagesGalerie[]" id="imagesGalerie"
+                            accept="image/jpeg,image/png,image/webp" multiple>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
         <div class="row">
             <div class="col">
                 <div class="card container p-3">
@@ -162,26 +174,9 @@ initialisation();
         </div>
 
 
-
-        <div class="row mt-3">
-            <div class="col">
-                <div class="card container p-3">
-                    <h6 class="card-title">Images du véhicule</h6>
-                    <div class="mb-3">
-                        <input type="file" class="form-control" name="imagesGalerie[]" id="imagesGalerie" 
-                               accept="image/jpeg,image/png,image/webp" multiple>
-                        <div class="form-text">Sélectionnez jusqu'à 3 images supplémentaires</div>
-                    </div>
-                </div>
-            </div>
+        
 
 
-
-
-
-    </div>
-
-    
 </form>
 
 
