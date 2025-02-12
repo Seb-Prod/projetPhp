@@ -192,3 +192,66 @@ function ajoutPhotoVoiture($pdo, $idVoiture, $idPhoto){
     }
     return $response;
 }
+
+function getVoitures($pdo) {
+    try {
+        $sql = "SELECT COUNT(*) OVER() as total, 
+                voitures.ID, 
+                voitures.nom as nom_voiture, 
+                marques.nom as nom_marque 
+                FROM voitures 
+                INNER JOIN marques ON voitures.id_marque = marques.ID";
+ 
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+ 
+        if (empty($result)) {
+            return [
+                'success' => true,
+                'message' => 'requête vide',
+                'data' => ['total' => 0, 'items' => []]
+            ];
+        }
+ 
+        $response = [
+            'success' => true,
+            'message' => 'requête ok',
+            'data' => [
+                'total' => $result[0]['total'],
+                'items' => $result
+            ]
+        ];
+    } catch (PDOException $e) {
+        $response = [
+            'success' => false,
+            'message' => 'requête KO',
+            'data' => $e->getCode()
+        ];
+    }
+ 
+    return $response;
+ }
+
+ function deleteVoiture($pdo, $id) {
+    try {
+        $sql = "DELETE FROM voitures WHERE ID = :id";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+ 
+        $response = [
+            'success' => true,
+            'message' => 'Voiture supprimée avec succès',
+            'data' => $id
+        ];
+    } catch (PDOException $e) {
+        $response = [
+            'success' => false,
+            'message' => 'Erreur lors de la suppression',
+            'data' => $e->getCode()
+        ];
+    }
+ 
+    return $response;
+ }

@@ -28,7 +28,7 @@ session_start();
                 </li>
                 <?php if ($_SESSION["admin"] === 1) : ?>
                     <li>
-                        <a href="adminAdd.php">admin</a>
+                        <a href="admin.php">admin</a>
                     </li>
                 <?php endif ?>
             </ul>

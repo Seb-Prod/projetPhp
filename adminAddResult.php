@@ -60,8 +60,8 @@ function addNewCar()
             addImages($idVoiture);
         }
     }
-    header("Location:adminAdd.php");
-    exit();
+    //header("Location:adminAdd.php");
+    //exit();
 }
 
 // Ajout des options
@@ -104,6 +104,7 @@ function addImages($idVoiture)
                         $idPhoto = intval($message['value']);
                         ajoutPhotoVoiture($pdo,$idVoiture, $idPhoto);
                     }
+                    varDump($message);
                 }
             }
         }
@@ -111,20 +112,9 @@ function addImages($idVoiture)
 }
 
 
-
-
-
-
-
-
-
 addNewCar();
 
 
-// Ajout voiture
-
-
-// Ajout images
 
 
 
