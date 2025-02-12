@@ -6,21 +6,23 @@ require_once 'includes/header.php';
 define('SECURE_ACCESS', true);
 require_once 'config.php';
 $pdo = getDBConnection();
-require_once 'functionFiltres'; // Fichier contenant la fonction getItem()
+require_once 'functionFiltres.php'; // Fichier contenant la fonction getItem()
 $moteurs = getItem($pdo, 'moteurs'); // Récupère les moteurs
 $marques = getItem($pdo, 'marques'); // Récupère les marques
 $types = getItem($pdo, 'types'); // Récupère les types de véhicules
 
 
-$sql = "SELECT DISTINCT v.ID AS voiture_id, v.nom AS voiture_nom, v.description, v.date_sortie, 
-       m.nom AS marque_nom, t.nom AS type_nom, mo.nom AS moteur_nom, p.nom AS photo_nom
+$sql = "SELECT v.ID AS voiture_id, v.nom AS voiture_nom, v.description, v.date_sortie, 
+       m.nom AS marque_nom, t.nom AS type_nom, mo.nom AS moteur_nom, MAX(p.nom) AS photo_nom
 FROM voitures v
 INNER JOIN marques m ON v.id_marque = m.ID
 INNER JOIN types t ON v.id_type = t.ID
 INNER JOIN voitures_moteurs vm ON v.ID = vm.id_voiture
 INNER JOIN moteurs mo ON vm.id_moteur = mo.ID
 LEFT JOIN voitures_photos vp ON v.ID = vp.id_voiture
-LEFT JOIN photos p ON vp.id_photo = p.ID";
+LEFT JOIN photos p ON vp.id_photo = p.ID
+GROUP BY v.ID, v.nom, v.description, v.date_sortie, m.nom, t.nom, mo.nom";
+
 
 
 $stmt = $pdo->prepare($sql);
@@ -55,20 +57,21 @@ $voituresFiltrees = array_filter($voitures, function ($voiture) use ($typesSelec
     </head>
 
     <body>
-        <section class="my-5" id="">
-            <div class="container vh-100">
-                <div class="row gy-4 gy-md-0 ">
+    <div class="page-container">
+        <section class="my-5 content vh-100" id="">
+            <div class="container">
+                <div class="row gy-4 gy-md-0 vh-100">
                     <div class="col-12 col-md-4 bg-light">
                         <div class="titre mt-0 d-flex align-items-center">
-                            <i class="bi bi-filter-square me-2"></i>
-                            <h3 class="mb-0">Filtres</h3>
+                            <i class="bi bi-filter-square me-2 mt-3"></i>
+                            <h4 class="mb-0 mt-3">Filtres</h3>
                         </div>
                         <form method="GET" action="index.php">
                             <div class="dropdown mt-3">
-                                <button class="btn btn-secondary dropdown-toggle w-100 d-flex justify-content-between align-items-center" type="button" data-bs-toggle="dropdown">
-                                    <span>Type de véhicules</span> <!-- Texte à gauche -->
-                                    <span id="type-counter" class="badge bg-light text-dark ms-auto ">0</span> <!-- Compteur à droite -->
-                                </button>
+                            <button class="btn bg-white dropdown-toggle w-100 d-flex justify-content-between align-items-center border" type="button" data-bs-toggle="dropdown">
+                                <span class=>Type de véhicules</span>
+                                <span id="type-counter" class="badge bg-light text-dark ms-auto">0</span>
+                            </button>
                                 <ul class="dropdown-menu">
                                     <?php foreach ($types as $type) : ?>
                                         <li>
@@ -82,7 +85,7 @@ $voituresFiltrees = array_filter($voitures, function ($voiture) use ($typesSelec
                                 </ul>
                             </div>
                             <div class="dropdown mt-3">
-                                <button class="btn btn-secondary dropdown-toggle w-100 d-flex justify-content-between align-items-center" type="button" data-bs-toggle="dropdown">
+                                <button class="btn bg-white dropdown-toggle w-100 d-flex justify-content-between align-items-center border" type="button" data-bs-toggle="dropdown">
                                     Marques <span id="marque-counter" class="badge bg-light text-dark ms-auto">0</span>
                                 </button>
                                 <ul class="dropdown-menu">
@@ -97,7 +100,7 @@ $voituresFiltrees = array_filter($voitures, function ($voiture) use ($typesSelec
                                 </ul>
                             </div>
                             <div class="dropdown mt-3">
-                                <button class="btn btn-secondary dropdown-toggle w-100 d-flex justify-content-between align-items-center" type="button" data-bs-toggle="dropdown">
+                                <button class="btn bg-white dropdown-toggle w-100 d-flex justify-content-between align-items-center border" type="button" data-bs-toggle="dropdown">
                                     Moteur <span id="moteur-counter" class="badge bg-light text-dark ms-auto">0</span>
                                 </button>
                                 <ul class="dropdown-menu">
@@ -114,12 +117,12 @@ $voituresFiltrees = array_filter($voitures, function ($voiture) use ($typesSelec
                             <button type="submit" class="btn mt-3 w-100 btn-primary">Rechercher</button>
                         </form>
                     </div>
-                    <div class="col-12 offset-1 col-md-7 bg-light ms-0">
+                    <div class="col-12 offset-1 col-md-7 bg-light ms-0 voitures-container">
                         <div class="titres">
-                            <h3>Les voitures</h3>
+                            <h3 class="mt-3">Les voitures</h3>
                         </div>
                         <?php foreach ($voituresFiltrees as $voiture) : ?>
-                            <div class="car-item card mt-3 w-100"
+                            <div class="car-item card mt-3 col-md-5 mx-md-1"
                                 data-type="<?php echo htmlspecialchars($voiture['type_nom'] ?? ''); ?>"
                                 data-marque="<?php echo htmlspecialchars($voiture['marque_nom'] ?? ''); ?>"
                                 data-moteur="<?php echo htmlspecialchars($voiture['moteur_nom'] ?? ''); ?>">
@@ -140,6 +143,7 @@ $voituresFiltrees = array_filter($voitures, function ($voiture) use ($typesSelec
             </div>
 
         </section>  
+    </div>
     </body>
 
     </html>

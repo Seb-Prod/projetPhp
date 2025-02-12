@@ -59,7 +59,7 @@ if (isset($_GET["message"]) and $_GET["message"] != '') {
 <div class="d-flex justify-content-center align-items-center vh-100">
     <div class="card container d-flex justify-content-center align-items-center" style="width: 18rem;">
         <div class="card-body">
-            <h5 class="card-title"><?php echo $cardTitle ?></h5>
+            <h4 class="card-title"><?php echo $cardTitle ?></h4>
             <form action="logInResult.php" method="post">
                 <!-- Pseudo -->
                 <?php if (isset($_SESSION["newUser_errorPseudo"])) : ?>

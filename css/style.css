@@ -164,3 +164,33 @@
 .modal-mentions {
     color: white !important;
 }
+
+/* .voitures-container {
+    max-height: 90vh;
+    overflow-y: auto;
+} */
+.car-item {
+    width: 100%; /* Pour les petits écrans */
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.page-container {
+    flex: 1; /* Fait en sorte que cette div prenne tout l'espace restant */
+    display: flex;
+    flex-direction: column;
+}
+
+.content {
+    flex: 1; /* Permet à la section de s'étendre sans chevaucher le footer */
+    overflow: auto; /* Ajoute un scroll si nécessaire */
+}
+
+footer {
+    flex-shrink: 0; /* Empêche le footer de rétrécir */
+}

@@ -14,14 +14,27 @@
                     </li>
                 </ul>
             </div>
-            <div class="col-12 col-md-4 text-md-end">
-                <ul class="list-inline">
-                    <li class="list-inline-item"> <a href="https://www.linkedin.com/in/moussa-kebe-b36ba9226" class="text-decoration-none" target="_blank" data-bs-toggle="tooltip" title="Linkedin">
-                        <i class="bi bi-linkedin fs-5"></i>
+            <div class="col-12 col-md-4 d-flex flex-column justify-content-center align-items-start align-items-md-center h-100">
+                <ul class="list-unstyled text-white">
+                    <li class="d-flex align-items-center">
+                        <a href="https://www.linkedin.com/in/moussa-kebe-b36ba9226" class="text-decoration-none d-block text-white" target="_blank" data-bs-toggle="tooltip" title="Linkedin">
+                            <i class="bi bi-linkedin fs-5 me-2"></i> Moussa KEBE
+                        </a>
+                    </li>
+                    <li class="d-flex align-items-center">
+                        <a href="https://www.linkedin.com/in/moussa-kebe-b36ba9226" class="text-decoration-none d-block text-white" target="_blank" data-bs-toggle="tooltip" title="Linkedin">
+                            <i class="bi bi-linkedin fs-5 me-2"></i> Ludovic Denis
+                        </a>
+                    </li>
+                    <li class="d-flex align-items-center">
+                        <a href="https://www.linkedin.com/in/moussa-kebe-b36ba9226" class="text-decoration-none d-block text-white" target="_blank" data-bs-toggle="tooltip" title="Linkedin">
+                            <i class="bi bi-linkedin fs-5 me-2"></i> Sebastien Drillaud
                         </a>
                     </li>
                 </ul>
             </div>
+
+
         </div>
     </div>
     <div class="modal fade" id="MentionsLegales" tabindex="-1" aria-labelledby="exampleModalLabel">
