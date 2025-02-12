@@ -1,5 +1,6 @@
 <?php
 // Inportation du header
+$pageTitle  = "Ajout de nouveaux model";
 require_once 'includes/header.php';
 
 
@@ -167,16 +168,9 @@ initialisation();
                 <div class="card container p-3">
                     <h6 class="card-title">Images du véhicule</h6>
                     <div class="mb-3">
-                        <label class="form-label" for="imageAccueil">Image principale</label>
-                        <input type="file" class="form-control" name="imageAccueil" id="imageAccueil" 
-                               accept="image/jpeg,image/png,image/webp" required>
-                        <div class="form-text">Format recommandé : JPEG, PNG ou WEBP, max 5MB</div>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label" for="imagesGalerie">Images galerie (optionnel)</label>
                         <input type="file" class="form-control" name="imagesGalerie[]" id="imagesGalerie" 
                                accept="image/jpeg,image/png,image/webp" multiple>
-                        <div class="form-text">Sélectionnez jusqu'à 5 images supplémentaires</div>
+                        <div class="form-text">Sélectionnez jusqu'à 3 images supplémentaires</div>
                     </div>
                 </div>
             </div>
