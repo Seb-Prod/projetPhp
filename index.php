@@ -56,7 +56,7 @@ $voituresFiltrees = array_filter($voitures, function ($voiture) use ($typesSelec
 
     <body>
         <section class="my-5" id="">
-            <div class="container">
+            <div class="container vh-100">
                 <div class="row gy-4 gy-md-0 ">
                     <div class="col-12 col-md-4 bg-light">
                         <div class="titre mt-0 d-flex align-items-center">

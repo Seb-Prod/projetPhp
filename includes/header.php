@@ -18,20 +18,30 @@ session_start();
 
 <body>
     <header>
-        <nav>
-            <ul>
-                <li>
-                    <a href="index.php">Accueil</a>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="index.php">Mon Site</a>
+        <div class="d-flex justify-content-end">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.php">Accueil</a>
                 </li>
-                <li>
-                    <a href="logIn.php">LogIn</a>
+                <li class="nav-item">
+                    <a class="nav-link" href="logIn.php">LogIn</a>
                 </li>
                 <?php if ($_SESSION["admin"] === 1) : ?>
-                    <li>
-                        <a href="adminAdd.php">admin</a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="adminAdd.php">Admin</a>
                     </li>
                 <?php endif ?>
             </ul>
-        </nav>
+        </div>
+    </div>
+</nav>
     </header>
     <main>

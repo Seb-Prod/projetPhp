@@ -160,3 +160,7 @@
 #panier li {
     margin-bottom: 10px;
 }
+
+.modal-mentions {
+    color: white !important;
+}
