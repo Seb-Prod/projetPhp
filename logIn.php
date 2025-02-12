@@ -56,8 +56,8 @@ if (isset($_GET["message"]) and $_GET["message"] != '') {
 
 ?>
 <!-- Début du contenu de la page -->
-<div class="d-flex justify-content-center align-items-center vh-100">
-    <div class="card container d-flex justify-content-center align-items-center" style="width: 18rem;">
+<div class="d-flex justify-content-center align-items-center vh-100 ">
+    <div class="card container d-flex justify-content-center align-items-center bg-light" style="width: 18rem;">
         <div class="card-body">
             <h4 class="card-title"><?php echo $cardTitle ?></h4>
             <form action="logInResult.php" method="post">

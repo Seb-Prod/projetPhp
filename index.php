@@ -122,13 +122,8 @@ $voituresFiltrees = array_filter($voitures, function ($voiture) use ($typesSelec
                             <h3 class="mt-3">Les voitures</h3>
                         </div>
                         <?php foreach ($voituresFiltrees as $voiture) : ?>
-                            <div class="car-item card mt-3 col-md-5 mx-md-1"
-                                data-type="<?php echo htmlspecialchars($voiture['type_nom'] ?? ''); ?>"
-                                data-marque="<?php echo htmlspecialchars($voiture['marque_nom'] ?? ''); ?>"
-                                data-moteur="<?php echo htmlspecialchars($voiture['moteur_nom'] ?? ''); ?>">
-                                <img src="img/<?php echo htmlspecialchars($voiture['photo_nom'] ?? 'default.jpg'); ?>"
-                                    class="card-img-top"
-                                    alt="<?php echo htmlspecialchars($voiture['voiture_nom'] ?? ''); ?>">
+                            <div class="car-item card mt-3 col-md-5 mx-md-1">
+                                <img src="img/<?php echo htmlspecialchars($voiture['photo_nom'] ?? 'default.jpg'); ?>" class="card-img-top shadow" alt="<?php echo htmlspecialchars($voiture['voiture_nom'] ?? ''); ?>">
                                 <div class="card-body">
                                     <h5 class="card-title"><?php echo htmlspecialchars($voiture['voiture_nom'] ?? ''); ?></h5>
                                     <p class="card-text"><?php echo htmlspecialchars($voiture['description'] ?? ''); ?></p>
@@ -137,6 +132,7 @@ $voituresFiltrees = array_filter($voitures, function ($voiture) use ($typesSelec
                                     <a href="voiture.php?idVoiture=<?php echo $voiture['voiture_id'] ?>" class="btn btn-primary">Voir plus</a>
                                 </div>
                             </div>
+
                         <?php endforeach; ?>
                     </div>
                 </div>
