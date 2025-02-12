@@ -60,8 +60,8 @@ initialisation();
 ?>
 <!-- Début du contenu de la page -->
 <form action="adminAddResult.php" method="post" enctype="multipart/form-data">
-    <div class="card container p-3">
-        <h5 class="card-title">Ajout d'un nouveau Model</h5>
+    <div class="card container p-3 bg-light mt-3 mb-3">
+        <h4 class="card-title mb-3">Ajout d'un nouveau Model</h4>
         <div class="row">
             <div class="col">
                 <div class="form-group mb-1">
@@ -123,12 +123,12 @@ initialisation();
                     <h6 class="card-title">Motorisations</h6>
                     <?php foreach ($motorisation as $key => $value) : ?>
                         <div class="form-check d-flex">
-                            <input class="form-check-input" type="checkbox" id="<?php echo $value ?>" name="motorisation[<?php echo $key; ?>]" value="<?php echo $key ?>">
+                            <input class="form-check-input me-2" type="checkbox" id="<?php echo $value ?>" name="motorisation[<?php echo $key; ?>]" value="<?php echo $key ?>">
                             <label class="form-check-label" for="<?php echo $value ?>"><?php echo $value ?></label>
                         </div>
                         <div class="form-group mb-2 d-flex align-items-center">
                             <input class="form-control" type="text" name="prixMotorisation[<?php echo $key; ?>]">
-                            <span>€</span>
+                            <span class="ms-2">€</span>
                         </div>
                     <?php endforeach ?>
                 </div>
@@ -138,12 +138,12 @@ initialisation();
                     <h6 class="card-title">Couleurs</h6>
                     <?php foreach ($couleurs as $key => $value) : ?>
                         <div class="form-check d-flex">
-                            <input class="form-check-input" type="checkbox" id="<?php echo $value ?>" name="couleur[<?php echo $key; ?>]" value="<?php echo $key ?>">
+                            <input class="form-check-input me-2" type="checkbox" id="<?php echo $value ?>" name="couleur[<?php echo $key; ?>]" value="<?php echo $key ?>">
                             <label class="form-check-label" for="<?php echo $value ?>"><?php echo $value ?></label>
                         </div>
                         <div class="form-group mb-2 d-flex align-items-center">
                             <input class="form-control" type="text" name="prixCouleur[<?php echo $key; ?>]">
-                            <span>€</span>
+                            <span class="ms-2">€</span>
                         </div>
                     <?php endforeach ?>
                 </div>
@@ -153,12 +153,12 @@ initialisation();
                     <h6 class="card-title">Jantes</h6>
                     <?php foreach ($jantes as $key => $value) : ?>
                         <div class="form-check d-flex">
-                            <input class="form-check-input" type="checkbox" id="<?php echo $value ?>" name="jante[<?php echo $key; ?>]" value="<?php echo $key ?>">
+                            <input class="form-check-input me-2" type="checkbox" id="<?php echo $value ?>" name="jante[<?php echo $key; ?>]" value="<?php echo $key ?>">
                             <label class="form-check-label" for="<?php echo $value ?>"><?php echo $value ?></label>
                         </div>
                         <div class="form-group mb-2 d-flex align-items-center">
                             <input class="form-control" type="text" name="prixJante[<?php echo $key; ?>]">
-                            <span>€</span>
+                            <span class="ms-2">€</span>
                         </div>
 
 
