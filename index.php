@@ -115,7 +115,7 @@ $voituresFiltrees = array_filter($voitures, function ($voiture) use ($typesSelec
                             <h3 class="mt-3">Les voitures</h3>
                         </div>
                         <?php foreach ($voituresFiltrees as $voiture) : ?>
-                            <div class="car-item card mt-3 col-md-5 mx-md-1">
+                            <div class="car-item card mt-3 col-md-5 mx-md-1 border">
                                 <img src="img/<?php echo htmlspecialchars($voiture['photo_nom'] ?? 'default.jpg'); ?>" class="card-img-top shadow" alt="<?php echo htmlspecialchars($voiture['voiture_nom'] ?? ''); ?>">
                                 <div class="card-body">
                                     <h5 class="card-title"><?php echo htmlspecialchars($voiture['voiture_nom'] ?? ''); ?></h5>
