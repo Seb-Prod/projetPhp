@@ -218,6 +218,22 @@ footer {
 .dark-mode .voitures-container{
     background-color: #1f1f1f !important;
 }
+
+.dark-mode .login{
+    background-color: #222529 !important;
+}
+
+.login{
+    width: 18rem;
+}
+
+.dark-mode .admin{
+    background-color: #222529 !important;
+}
+
+.modal-title {
+    color: white !important;
+}
 /* .dark-mode a {
     color: #0dcaf0 !important; /* Couleur pour les liens */
 /* }

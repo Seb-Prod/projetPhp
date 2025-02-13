@@ -47,20 +47,20 @@ $voituresFiltrees = array_filter($voitures, function ($voiture) use ($typesSelec
 // var_dump($_GET);
 // echo '</pre>';
 // ?>
-    <body>
+
     <div class="page-container">
-        <section class="my-5 content vh-100" id="">
+        <section class="my-5 content vh-100">
             <div class="container">
                 <div class="row justify-content-center gy-4 gy-md-0 vh-100">
                     <div class="col-12 col-md-3 bg-light filtres-colonne">
                         <div class="titre mt-0 d-flex align-items-center">
                             <i class="bi bi-filter-square me-2 mt-3"></i>
-                            <h4 class="mb-0 mt-3">Filtres</h3>
+                            <h4 class="mb-0 mt-3">Filtres</h4>
                         </div>
                         <form method="GET" action="index.php">
                             <div class="dropdown mt-3">
                             <button class="btn bg-white dropdown-toggle w-100 d-flex justify-content-between align-items-center border" type="button" data-bs-toggle="dropdown">
-                                <span class=>Type de véhicules</span>
+                                <span>Type de véhicules</span>
                                 <span id="type-counter" class="badge bg-light text-dark ms-auto">0</span>
                             </button>
                                 <ul class="dropdown-menu">
@@ -131,7 +131,6 @@ $voituresFiltrees = array_filter($voitures, function ($voiture) use ($typesSelec
 
         </section>  
     </div>
-    </body>
 
 
     <!-- Fin du contenu de la page -->

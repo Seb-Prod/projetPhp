@@ -3,7 +3,7 @@ $pageTitle = "Description voiture";
 require_once 'includes/header.php';
 define('SECURE_ACCESS', true);
 require_once 'config.php';
-$id_voiture = 4; //Remplacé par un get lié sur la page de Moussa
+$id_voiture = $_GET['id']; //Remplacé par un get lié sur la page de Moussa
 $pdo = getDBConnection();
 try {
     $pdo = getDBConnection();

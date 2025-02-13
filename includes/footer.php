@@ -22,12 +22,12 @@
                         </a>
                     </li>
                     <li class="d-flex align-items-center">
-                        <a href="https://www.linkedin.com/in/moussa-kebe-b36ba9226" class="text-decoration-none d-block text-white" target="_blank" data-bs-toggle="tooltip" title="Linkedin">
+                        <a href="https://www.linkedin.com/in/ludovic-denis-698b97196/" class="text-decoration-none d-block text-white" target="_blank" data-bs-toggle="tooltip" title="Linkedin">
                             <i class="bi bi-linkedin fs-5 me-2"></i> Ludovic Denis
                         </a>
                     </li>
                     <li class="d-flex align-items-center">
-                        <a href="https://www.linkedin.com/in/moussa-kebe-b36ba9226" class="text-decoration-none d-block text-white" target="_blank" data-bs-toggle="tooltip" title="Linkedin">
+                        <a href="https://www.linkedin.com/in/s%C3%A9bastien-drillaud-b68b3318a/" class="text-decoration-none d-block text-white" target="_blank" data-bs-toggle="tooltip" title="Linkedin">
                             <i class="bi bi-linkedin fs-5 me-2"></i> Sebastien Drillaud
                         </a>
                     </li>
@@ -37,14 +37,14 @@
 
         </div>
     </div>
-    <div class="modal fade" id="MentionsLegales" tabindex="-1" aria-labelledby="exampleModalLabel">
+    <div class="modal fade " id="MentionsLegales" tabindex="-1" aria-labelledby="examplModalLabel" style="color: red;">
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
-            <div class="modal-header ">
-              <h5 class="modal-title modal-mentions">Mentions Légales</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
+          <div class="modal-header ">
+    <h5 class="modal-title modal-mentions" style="color: red !important;" id="examplModalLabel">Mentions Légales</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
+            <div class="modal-body" style="color: red;">
                 <h6>Éditeur du site</h6>
             
                 <h6>Propriété intellectuelle</h6>
