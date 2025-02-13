@@ -8,29 +8,41 @@ var_dump($_GET);
 echo '</pre>';
 $id_voiture = $_GET["idVoiture"]; //Remplacé par un get lié sur la page de Moussa
 $pdo = getDBConnection();
-try {
-    $pdo = getDBConnection();
-    
-    $sql = "SELECT vc.id_couleur, c.nom, vc.prix 
-    FROM voitures_couleurs vc
-    INNER JOIN couleurs c ON vc.id_couleur = c.id 
-    WHERE vc.id_voiture = :id_voiture";
 
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute(['id_voiture' => $id_voiture]);
-
-    $resultat = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-    if (!empty($resultat)) {
-        echo "Données récupérées avec succès :";
-        print_r($resultat);
-    } else {
-        echo "Aucun résultat trouvé.";
+function getVoitureCaracteristiques($id_voiture, $caracteristique) {
+    try {
+        $pdo = getDBConnection();
+        
+        $tables = [
+            'couleur' => ['table' => 'voitures_couleurs', 'join' => 'couleurs', 'id' => 'id_couleur'],
+            'jante' => ['table' => 'voitures_jantes', 'join' => 'jantes', 'id' => 'id_jante'],
+            'moteur' => ['table' => 'voitures_moteurs', 'join' => 'moteurs', 'id' => 'id_moteur']
+        ];
+        
+        if (!isset($tables[$caracteristique])) {
+            return ['error' => "Caractéristique invalide."];
+        }
+        
+        $table = $tables[$caracteristique]['table'];
+        $join = $tables[$caracteristique]['join'];
+        $id = $tables[$caracteristique]['id'];
+        
+        $sql = "SELECT vc.$id, c.nom, vc.prix 
+                FROM $table vc
+                INNER JOIN $join c ON vc.$id = c.id 
+                WHERE vc.id_voiture = :id_voiture";
+        
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute(['id_voiture' => $id_voiture]);
+        
+        $resultat = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $resultat;
+    } catch (PDOException $e) {
+        return ['error' => "Erreur SQL : " . $e->getMessage()];
     }
-
-} catch (PDOException $e) {
-    echo "Erreur SQL : " . $e->getMessage();
 }
+
 ?>
 
 <div id="pageVoiture">
@@ -67,6 +79,10 @@ try {
         <label for="couleur">Couleur :</label>
         <select id="couleur">
             <?php foreach($resultat as $couleur) : ?>
+                <!-- //Exemple d'utilisation
+                $id_voiture = 1; // Remplace par une valeur réelle
+                $result = getVoitureCouleurs($id_voiture);
+                print_r($result); -->
                 <option value="<?php echo $couleur['id_couleur']?>"><?php echo $couleur['nom']. ' prix : '. $couleur['prix'] . '€'?></option>
                 <?php endforeach?>
       
@@ -74,20 +90,16 @@ try {
         
         <label for="jantes">Jantes :</label>
         <select id="jantes">
-            <option value="17\Alliage" data-price="700">17" Alliage (+700€)</option>
-            <option value="18\Alliage" data-price="800">18" Alliage (+800€)</option>
-            <option value="19\Alliage" data-price="900">19" Alliage (+900€)</option>
-            <option value="17\Chrome" data-price="1000">17" Chrome (+1000€)</option>
-            <option value="18\Chrome" data-price="1100">18" Chrome (+1100€)</option>
-            <option value="19\Chrome" data-price="1200">19" Chrome (+1200€)</option>
+        <?php foreach($resultat as $jantes) : ?>
+                <option value="<?php echo $jantes['id_jantes']?>"><?php echo $jantes['nom']. ' prix : '. $jantes['prix'] . '€'?></option>
+                <?php endforeach?>
         </select>
         
         <label for="motorisation">Motorisation :</label>
         <select id="motorisation">
-            <option value="Essence" data-price="2000">Essence (+2000€)</option>
-            <option value="Diesel" data-price="2500">Diesel (+2500€)</option>
-            <option value="Hybride" data-price="3000">Hybride (+3000€)</option>
-            <option value="Électrique" data-price="3500">Électrique (+3500€)</option>
+        <?php foreach($resultat as $moteur) : ?>
+                <option value="<?php echo $moteur['id_jantes']?>"><?php echo $moteur['nom']. ' prix : '. $moteur['prix'] . '€'?></option>
+                <?php endforeach?>
         </select>
         
         <button id="ajouter">Ajouter au panier</button>
