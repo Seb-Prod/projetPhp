@@ -10,7 +10,7 @@
             <div class="col-12 col-md-4 text-md-center">
                 <ul class="list-unstyled mb-0">
                     <li>
-                        <a class="text-decoration-none text-dark" data-bs-toggle="modal" data-bs-target="#MentionsLegales">Mentions légales</a>
+                        <a class="text-decoration-none text-white mentions" data-bs-toggle="modal" data-bs-target="#MentionsLegales">Mentions légales</a>
                     </li>
                 </ul>
             </div>
@@ -37,14 +37,14 @@
 
         </div>
     </div>
-    <div class="modal fade " id="MentionsLegales" tabindex="-1" aria-labelledby="examplModalLabel" style="color: red;">
+    <div class="modal fade " id="MentionsLegales" tabindex="-1" aria-labelledby="examplModalLabel">
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
           <div class="modal-header ">
-    <h5 class="modal-title modal-mentions" style="color: red !important;" id="examplModalLabel">Mentions Légales</h5>
+    <h5 class="modal-title modal-mentions text-dark" id="examplModalLabel">Mentions Légales</h5>
     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 </div>
-            <div class="modal-body" style="color: red;">
+            <div class="modal-body">
                 <h6>Éditeur du site</h6>
             
                 <h6>Propriété intellectuelle</h6>

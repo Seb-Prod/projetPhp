@@ -161,10 +161,6 @@
     margin-bottom: 10px;
 }
 
-.modal-mentions {
-    color: white !important;
-}
-
 /* .voitures-container {
     max-height: 90vh;
     overflow-y: auto;
@@ -233,6 +229,10 @@ footer {
 
 .modal-title {
     color: white !important;
+}
+
+.mentions{
+    cursor: pointer;
 }
 /* .dark-mode a {
     color: #0dcaf0 !important; /* Couleur pour les liens */
