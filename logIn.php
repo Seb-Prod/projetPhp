@@ -56,64 +56,66 @@ if (isset($_GET["message"]) and $_GET["message"] != '') {
 
 ?>
 <!-- Début du contenu de la page -->
-<div class="card container d-flex justify-content-center align-items-center" style="width:18rem;">
-    <div class="card-body ">
-        <h5 class="card-title"><?php echo $cardTitle ?></h5>
-        <form action="logInResult.php" method="post">
-            <!-- Pseudo -->
-            <?php if (isset($_SESSION["newUser_errorPseudo"])) : ?>
-                <div class="alert alert-danger" role="alert">
-                    <?php echo $_SESSION["newUser_errorPseudo"] ?>
+<div class="d-flex justify-content-center align-items-center vh-100 ">
+    <div class="card container d-flex justify-content-center align-items-center bg-light" style="width: 18rem;">
+        <div class="card-body">
+            <h4 class="card-title"><?php echo $cardTitle ?></h4>
+            <form action="logInResult.php" method="post">
+                <!-- Pseudo -->
+                <?php if (isset($_SESSION["newUser_errorPseudo"])) : ?>
+                    <div class="alert alert-danger" role="alert">
+                        <?php echo $_SESSION["newUser_errorPseudo"] ?>
+                    </div>
+                <?php endif ?>
+                <div class="form-group mb-1">
+                    <label class="form-label" for="inputPseudo">Pseudo</label>
+                    <input id="inputPseudo" class="form-control" type="text" name="pseudo" required value="<?php echo $pseudo ?>"/>
                 </div>
-            <?php endif ?>
-            <div class="form-group mb-1">
-                <label class="form-label" for="inputPseudo">Pseudo</label>
-                <input id="inputPseudo" class="form-control" type="text" name="pseudo" required value="<?php echo $pseudo ?>"/>
-            </div>
 
-            <?php if ($newUser) : ?>
-                <!-- Nom -->
-                <div class="form-group mb-1">
-                    <label class="form-label" for="inputNom">Nom</label>
-                    <input id="inputNom" class="form-control" type="text" name="nom" required value="<?php echo $nom ?>" />
-                </div>
-                <!-- Prénom -->
-                <div class="form-group mb-1">
-                    <label class="form-label" for="inputPrenom">Prénom</label>
-                    <input id="inputPrenom" class="form-control" type="text" name="prenom" required value="<?php echo $prenom ?>"/>
-                </div>
-            <?php endif ?>
-            <!-- Mot de passe -->
-            <?php if (isset($_SESSION["newUser_errorPass"]))  : ?>
-                <div class="alert alert-danger" role="alert">
-                    <?php echo $_SESSION["newUser_errorPass"] ?>
-                </div>
-            <?php endif ?>
-            <div class="form-group mb-1">
-                <label class="form-label" for="inputPass">Mot de passe</label>
-                <input id="inputPass" class="form-control" type="password" name="pass" required />
-            </div>
-            <?php if ($newUser) : ?>
-                <!-- Confimation du mot de passe -->
-                <div class="form-group mb-1">
-                    <label class="form-label" for="inputConfirmPass">Confirmer le mot de passe</label>
-                    <input id="inputConfirmPass" class="form-control" type="password" name="confirmPass" required />
-                </div>
-            <?php endif ?>
-            <div class="mb-1">
-                <button type="submit" class="btn btn-primary">Valider</button>
-            </div>
+                <?php if ($newUser) : ?>
+                    <!-- Nom -->
+                    <div class="form-group mb-1">
+                        <label class="form-label" for="inputNom">Nom</label>
+                        <input id="inputNom" class="form-control" type="text" name="nom" required value="<?php echo $nom ?>" />
+                    </div>
+                    <!-- Prénom -->
+                    <div class="form-group mb-1">
+                        <label class="form-label" for="inputPrenom">Prénom</label>
+                        <input id="inputPrenom" class="form-control" type="text" name="prenom" required value="<?php echo $prenom ?>"/>
+                    </div>
+                <?php endif ?>
 
-            <?php if (!$newUser) : ?>
+                <!-- Mot de passe -->
+                <?php if (isset($_SESSION["newUser_errorPass"]))  : ?>
+                    <div class="alert alert-danger" role="alert">
+                        <?php echo $_SESSION["newUser_errorPass"] ?>
+                    </div>
+                <?php endif ?>
+                <div class="form-group mb-1">
+                    <label class="form-label" for="inputPass">Mot de passe</label>
+                    <input id="inputPass" class="form-control" type="password" name="pass" required />
+                </div>
+
+                <?php if ($newUser) : ?>
+                    <!-- Confimation du mot de passe -->
+                    <div class="form-group mb-1">
+                        <label class="form-label" for="inputConfirmPass">Confirmer le mot de passe</label>
+                        <input id="inputConfirmPass" class="form-control" type="password" name="confirmPass" required />
+                    </div>
+                <?php endif ?>
+
                 <div class="mb-1">
-                    <a href="logIn.php?newUser=true">Créer un compte</a>
+                    <button type="submit" class="btn btn-primary">Valider</button>
                 </div>
-            <?php endif ?>
 
-
-        </form>
+                <?php if (!$newUser) : ?>
+                    <div class="mb-1">
+                        <a href="logIn.php?newUser=true">Créer un compte</a>
+                    </div>
+                <?php endif ?>
+            </form>
+        </div>
     </div>
-
 </div>
 
 <!-- Fin du contenu de la page -->

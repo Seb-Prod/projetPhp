@@ -117,7 +117,39 @@ function ajoutOptionVoiture($pdo, $table, $idVoiture, $nomOption, $idOption, $pr
                 'message' => "L'ajout de l'option à échoué"
             ];
         }
+    } catch (PDOException $e) {
+        $response = [
+            'sucess' => false,
+            'message' => "Erreur BDD : " . $e
+        ];
+    }
+    return $response;
+}
 
+function ajoutPhoto($pdo, $name)
+{
+    echo "j'ajoute photo";
+    try {
+        // Préparation de la requête
+        $sql = "INSERT INTO photos (nom) VALUES (:nom)";
+        $stmt = $pdo->prepare($sql);
+
+        // Exécution de la requête avec les paramètres
+        $result = $stmt->execute([':nom' => $name]);
+
+        if ($result) {
+            $response = [
+                'sucess' => true,
+                'message' => "L'ajout de la photo à réussi",
+                'value' => $pdo->lastInsertId()
+            ];
+            //$message = true;
+        } else {
+            $response = [
+                'sucess' => false,
+                'message' => "L'ajout de la photo à échoué"
+            ];
+        }
 
     } catch (PDOException $e) {
         $response = [
@@ -127,3 +159,99 @@ function ajoutOptionVoiture($pdo, $table, $idVoiture, $nomOption, $idOption, $pr
     }
     return $response;
 }
+
+function ajoutPhotoVoiture($pdo, $idVoiture, $idPhoto){
+    try {
+        // Préparation de la requête
+        $sql = "INSERT INTO voitures_photos (id_voiture, id_photo) VALUES (:idVoiture, :idPhoto)";
+        $stmt = $pdo->prepare($sql);
+
+        // Exécution de la requête avec les paramètres
+        $result = $stmt->execute([
+            ':idVoiture' => $idVoiture,
+            ':idPhoto' => $idPhoto
+        ]);
+
+        if ($result) {
+            $response = [
+                'sucess' => true,
+                'message' => "L'ajout a réussie'"
+            ];
+            //$message = true;
+        } else {
+            $response = [
+                'sucess' => false,
+                'message' => "L'ajout a échoué"
+            ];
+        }
+    } catch (PDOException $e) {
+        $response = [
+            'sucess' => false,
+            'message' => "Erreur BDD : " . $e
+        ];
+    }
+    return $response;
+}
+
+function getVoitures($pdo) {
+    try {
+        $sql = "SELECT COUNT(*) OVER() as total, 
+                voitures.ID, 
+                voitures.nom as nom_voiture, 
+                marques.nom as nom_marque 
+                FROM voitures 
+                INNER JOIN marques ON voitures.id_marque = marques.ID";
+ 
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+ 
+        if (empty($result)) {
+            return [
+                'success' => true,
+                'message' => 'requête vide',
+                'data' => ['total' => 0, 'items' => []]
+            ];
+        }
+ 
+        $response = [
+            'success' => true,
+            'message' => 'requête ok',
+            'data' => [
+                'total' => $result[0]['total'],
+                'items' => $result
+            ]
+        ];
+    } catch (PDOException $e) {
+        $response = [
+            'success' => false,
+            'message' => 'requête KO',
+            'data' => $e->getCode()
+        ];
+    }
+ 
+    return $response;
+ }
+
+ function deleteVoiture($pdo, $id) {
+    try {
+        $sql = "DELETE FROM voitures WHERE ID = :id";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+ 
+        $response = [
+            'success' => true,
+            'message' => 'Voiture supprimée avec succès',
+            'data' => $id
+        ];
+    } catch (PDOException $e) {
+        $response = [
+            'success' => false,
+            'message' => 'Erreur lors de la suppression',
+            'data' => $e->getCode()
+        ];
+    }
+ 
+    return $response;
+ }

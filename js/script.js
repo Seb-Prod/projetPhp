@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Fonction pour mettre à jour un compteur
+    // 1. Fonction des compteurs
     function updateCounter(checkboxClass, counterId) {
         const checkboxes = document.querySelectorAll(checkboxClass);
         const counter = document.getElementById(counterId);
@@ -12,39 +12,38 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Appliquer la fonction aux deux dropdowns
-    updateCounter('.marque-checkbox', 'marque-counter'); // Pour les marques
-    updateCounter('.moteur-checkbox', 'moteur-counter'); // Pour les moteurs
+    // Initialisation des compteurs
+    updateCounter('.marque-checkbox', 'marque-counter');
+    updateCounter('.moteur-checkbox', 'moteur-counter');
     updateCounter('.type-checkbox', 'type-counter');
+
+    const body = document.body;
+    const themeSwitcherMobile = document.getElementById("themeSwitcher");
+    const themeSwitcherDesktop = document.getElementById("themeSwitcher-desktop");
+
+    // Vérifier si un mode est déjà enregistré
+    if (localStorage.getItem("darkMode") === "enabled") {
+        body.classList.add("dark-mode");
+    }
+
+    function toggleDarkMode() {
+        body.classList.toggle("dark-mode");
+        
+        // Sauvegarde de la préférence dans localStorage
+        if (body.classList.contains("dark-mode")) {
+            localStorage.setItem("darkMode", "enabled");
+        } else {
+            localStorage.setItem("darkMode", "disabled");
+        }
+    }
+
+    // Ajouter les événements sur les boutons
+    if (themeSwitcherMobile) {
+        themeSwitcherMobile.addEventListener("click", toggleDarkMode);
+    }
+    if (themeSwitcherDesktop) {
+        themeSwitcherDesktop.addEventListener("click", toggleDarkMode);
+    }
+
+
 });
-    // document.addEventListener('DOMContentLoaded', function() {
-    //     // Votre code existant pour les compteurs...
-    
-    //     // Ajout du filtrage
-    //     document.querySelector('button[type="submit"]').addEventListener('click', function(e) {
-    //         e.preventDefault(); // Empêcher l'envoi du formulaire
-    
-    //         // Récupérer les filtres sélectionnés
-    //         const selectedTypes = Array.from(document.querySelectorAll('.type-checkbox:checked'))
-    //             .map(cb => cb.value);
-    //         const selectedMarques = Array.from(document.querySelectorAll('.marque-checkbox:checked'))
-    //             .map(cb => cb.value);
-    //         const selectedMoteurs = Array.from(document.querySelectorAll('.moteur-checkbox:checked'))
-    //             .map(cb => cb.value);
-    
-    //         // Sélectionner tous les éléments à filtrer
-    //         const items = document.querySelectorAll('.car-item');
-    
-    //         items.forEach(item => {
-    //             const typeMatch = selectedTypes.length === 0 || 
-    //                 selectedTypes.includes(item.dataset.type);
-    //             const marqueMatch = selectedMarques.length === 0 || 
-    //                 selectedMarques.includes(item.dataset.marque);
-    //             const moteurMatch = selectedMoteurs.length === 0 || 
-    //                 selectedMoteurs.includes(item.dataset.moteur);
-    
-    //             // Afficher/masquer l'élément selon les filtres
-    //             item.style.display = (typeMatch && marqueMatch && moteurMatch) ? '' : 'none';
-    //         });
-    //     });
-    // });
