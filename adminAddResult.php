@@ -54,9 +54,9 @@ function addNewCar()
         $message = ajoutVoiture($pdo, $model, $type, $marque, $description, $date);
         if ($message['sucess']) {
             $idVoiture = intval($message['value']);
-            addOptions($idVoiture, ['motorisation', 'prixMotorisation'], 'voitures_moteurs', 'id_moteur');
-            addOptions($idVoiture, ['couleur', 'prixCouleur'], 'voitures_couleur', 'id_couleur');
-            addOptions($idVoiture, ['jante', 'prixJante'], 'voitures_jantes', 'id_jante');
+            addOptions($idVoiture, ['motorisation', 'prixmotorisation'], 'voitures_moteurs', 'id_moteur');
+            addOptions($idVoiture, ['couleur', 'prixmouleur'], 'voitures_couleur', 'id_couleur');
+            addOptions($idVoiture, ['jante', 'prixjante'], 'voitures_jantes', 'id_jante');
             addImages($idVoiture);
         }
     }

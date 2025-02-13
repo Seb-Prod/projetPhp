@@ -55,6 +55,30 @@ function initialisation()
     $motorisation = chargeItemBdd("moteurs", ["Essence", "Diesel", "Electrique"]);
 }
 
+function genererBlocSelection($titre, $elements, $type)
+{
+    echo '<div class="col">';
+    echo '<div class="card container p-3">';
+    echo "<h6 class='card-title'>$titre</h6>";
+
+    foreach ($elements as $key => $value) {
+        $checked = '';
+        $prix = '0';
+
+
+        echo '<div class="form-check d-flex">';
+        echo "<input class='form-check-input me-2' type='checkbox' id='$value' name='{$type}[$key]' value='$key' $checked>";
+        echo "<label class='form-check-label' for='$value'>$value</label>";
+        echo '</div>';
+        echo '<div class="form-group mb-2 d-flex align-items-center">';
+        echo "<input class='form-control' type='number' name='prix{$type}[$key]' value='$prix' min='0'>";
+        echo '<span class="ms-2">€</span>';
+        echo '</div>';
+    }
+    echo '</div>';
+    echo '</div>';
+}
+
 initialisation();
 
 ?>
@@ -118,54 +142,11 @@ initialisation();
         </div>
         <br>
         <div class="row">
-            <div class="col">
-                <div class="card container p-3">
-                    <h6 class="card-title">Motorisations</h6>
-                    <?php foreach ($motorisation as $key => $value) : ?>
-                        <div class="form-check d-flex">
-                            <input class="form-check-input me-2" type="checkbox" id="<?php echo $value ?>" name="motorisation[<?php echo $key; ?>]" value="<?php echo $key ?>">
-                            <label class="form-check-label" for="<?php echo $value ?>"><?php echo $value ?></label>
-                        </div>
-                        <div class="form-group mb-2 d-flex align-items-center">
-                            <input class="form-control" type="text" name="prixMotorisation[<?php echo $key; ?>]">
-                            <span class="ms-2">€</span>
-                        </div>
-                    <?php endforeach ?>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card container p-3">
-                    <h6 class="card-title">Couleurs</h6>
-                    <?php foreach ($couleurs as $key => $value) : ?>
-                        <div class="form-check d-flex">
-                            <input class="form-check-input me-2" type="checkbox" id="<?php echo $value ?>" name="couleur[<?php echo $key; ?>]" value="<?php echo $key ?>">
-                            <label class="form-check-label" for="<?php echo $value ?>"><?php echo $value ?></label>
-                        </div>
-                        <div class="form-group mb-2 d-flex align-items-center">
-                            <input class="form-control" type="text" name="prixCouleur[<?php echo $key; ?>]">
-                            <span class="ms-2">€</span>
-                        </div>
-                    <?php endforeach ?>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card container p-3">
-                    <h6 class="card-title">Jantes</h6>
-                    <?php foreach ($jantes as $key => $value) : ?>
-                        <div class="form-check d-flex">
-                            <input class="form-check-input me-2" type="checkbox" id="<?php echo $value ?>" name="jante[<?php echo $key; ?>]" value="<?php echo $key ?>">
-                            <label class="form-check-label" for="<?php echo $value ?>"><?php echo $value ?></label>
-                        </div>
-                        <div class="form-group mb-2 d-flex align-items-center">
-                            <input class="form-control" type="text" name="prixJante[<?php echo $key; ?>]">
-                            <span class="ms-2">€</span>
-                        </div>
-
-
-                    <?php endforeach ?>
-                </div>
-            </div>
-
+            <?php
+            genererBlocSelection('Motorisations', $motorisation, 'motorisation');
+            genererBlocSelection('Couleurs', $couleurs, 'couleur');
+            genererBlocSelection('Jantes', $jantes, 'jante');
+            ?>
         </div>
         <div class="row">
             <div class="mb-1">
@@ -174,7 +155,8 @@ initialisation();
         </div>
 
 
-        
+
+
 
 
 </form>
