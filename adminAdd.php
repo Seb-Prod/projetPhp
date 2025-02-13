@@ -67,8 +67,8 @@ function genererBlocSelection($titre, $elements, $type)
 
 
         echo '<div class="form-check d-flex">';
-        echo "<input class='form-check-input me-2' type='checkbox' id='$value' name='{$type}[$key]' value='$key' $checked>";
-        echo "<label class='form-check-label' for='$value'>$value</label>";
+        echo "<input class='form-check-input me-2' type='checkbox' id='{$titre}$key' name='{$type}[$key]' value='$key' $checked>";
+        echo "<label class='form-check-label' for='{$titre}$key'>$value</label>";
         echo '</div>';
         echo '<div class="form-group mb-2 d-flex align-items-center">';
         echo "<input class='form-control' type='number' name='prix{$type}[$key]' value='$prix' min='0'>";
@@ -90,7 +90,7 @@ initialisation();
             <div class="col">
                 <div class="form-group mb-1">
                     <label class="form-label" for="inputModel">Model</label>
-                    <input id="inputModel" class="form-control" type="text" name="model" required />
+                    <input id="inputModel" class="form-control" type="text" name="model" required >
                 </div>
             </div>
             <div class="col-md-2">
@@ -116,7 +116,7 @@ initialisation();
             <div class="col-md-3">
                 <div class="form-group mb-1">
                     <label class="form-label" for="inputDate">Date de sortie</label>
-                    <input id="inputDate" class="form-control" type="date" name="date" required />
+                    <input id="inputDate" class="form-control" type="date" name="date" required >
                 </div>
             </div>
         </div>
@@ -154,7 +154,7 @@ initialisation();
             </div>
         </div>
 
-
+    </div>
 
 
 

@@ -44,7 +44,7 @@ if ($voitures['success']) {
             <ul class="dropdown-menu">
                 <?php foreach ($models as $model) : $nom = $model['nom_marque'] . ' ' .  $model['nom_voiture']; ?>
                     <li>
-                        <a class="dropdown-item" href="adminEdit.php?id=<?php echo $model['ID'] ?>&model=<?php echo $nom ?>"><?php echo $nom ?></a>
+                        <a class="dropdown-item" href="adminEdit.php?id=<?php echo $model['ID'] ?>&model=<?php echo $model['nom_voiture'] ?>&marque=<?php echo $model['nom_marque'] ?>"><?php echo $nom ?></a>
                     </li>
                 <?php endforeach ?>
             </ul>
@@ -56,15 +56,12 @@ if ($voitures['success']) {
             <ul class="dropdown-menu">
                 <?php foreach ($models as $model) : $nom = $model['nom_marque'] . ' ' .  $model['nom_voiture']; ?>
                     <li>
-                        <a class="dropdown-item" href="adminSupprime.php?id=<?php echo $model['ID'] ?>&model=<?php echo $nom ?>"><?php echo $nom ?></a>
+                        <a class="dropdown-item" href="adminSupprime.php?id=<?php echo $model['ID'] ?>&model=<?php echo $model['nom_voiture'] ?>&marque=<?php echo $model['nom_marque'] ?>"><?php echo $nom ?></a>
                     </li>
                 <?php endforeach ?>
             </ul>
         </div>
     </div>
-</div>
-
-
 </div>
 
 

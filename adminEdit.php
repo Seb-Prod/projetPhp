@@ -65,8 +65,8 @@ function genererBlocSelection($titre, $elements, $elementsAssocies, $type)
         }
 
         echo '<div class="form-check d-flex">';
-        echo "<input class='form-check-input me-2' type='checkbox' id='$value' name='{$type}[$key]' value='$key' $checked>";
-        echo "<label class='form-check-label' for='$value'>$value</label>";
+        echo "<input class='form-check-input me-2' type='checkbox' id='{$titre}$key' name='{$type}[$key]' value='$key' $checked>";
+        echo "<label class='form-check-label' for='{$titre}$key'>$value</label>";
         echo '</div>';
         echo '<div class="form-group mb-2 d-flex align-items-center">';
         echo "<input class='form-control' type='number' name='prix{$type}[$key]' value='$prix' min='0'>";
@@ -84,8 +84,9 @@ function genererBlocSelection($titre, $elements, $elementsAssocies, $type)
 
 
 // Si les champs sont présents
-if (checkRequiredFields(['id', 'model'])) {
+if (checkRequiredFields(['id', 'model', 'marque'])) {
     $model = $_GET['model'];
+    $marque = $_GET['marque'];
     $id = $_GET['id'];
 
     $couleurs = chargeItemBdd("couleurs");
@@ -108,7 +109,8 @@ if (checkRequiredFields(['id', 'model'])) {
         $jantesAssocies = $requetteJanteAssocies['data'];
     }
 } else {
-    $model = "";
+    header("Location:admin.php");
+    exit();
 }
 
 
@@ -117,7 +119,7 @@ if (checkRequiredFields(['id', 'model'])) {
 <!-- Début du contenu de la page -->
 <div class="card container p-1">
     <div class="card-body">
-        <h4 class="card-title">Modifier les "<b><?php echo $model ?></b>" dans la BDD</h4>
+        <h4 class="card-title">Modifier les "<b><?php echo $marque . ' ' . $model ?></b>" dans la BDD</h4>
         <div class="form-group mb-1">
             <form action="adminEditResult.php" method="post">
                 <input type="hidden" name="id" value="<?php echo $id ?>">
