@@ -194,3 +194,35 @@ html, body {
 footer {
     flex-shrink: 0; /* Empêche le footer de rétrécir */
 }
+
+/* Mode sombre */
+.dark-mode {
+    background-color:#1f1f1f !important;
+    color: #ffffff !important;
+}
+
+/* Changer la couleur des éléments Bootstrap */
+.dark-mode .navbar {
+    background-color: #222529!important;
+}
+
+.dark-mode .card {
+    background-color: #1e1e1e !important;
+    color: white;
+}
+
+.dark-mode .filtres-colonne{
+    background-color:#1f1f1f !important;
+}
+
+.dark-mode .voitures-container{
+    background-color: #1f1f1f !important;
+}
+/* .dark-mode a {
+    color: #0dcaf0 !important; /* Couleur pour les liens */
+/* }
+
+.dark-mode .btn-primary {
+    background-color: #0dcaf0 !important;
+    border-color: #0dcaf0 !important;
+} */ 

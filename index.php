@@ -47,21 +47,12 @@ $voituresFiltrees = array_filter($voitures, function ($voiture) use ($typesSelec
 // var_dump($_GET);
 // echo '</pre>';
 // ?>
-<!<!DOCTYPE html>
-    <html lang="fr">
-
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
-    </head>
-
     <body>
     <div class="page-container">
         <section class="my-5 content vh-100" id="">
             <div class="container">
-                <div class="row gy-4 gy-md-0 vh-100">
-                    <div class="col-12 col-md-4 bg-light">
+                <div class="row justify-content-center gy-4 gy-md-0 vh-100">
+                    <div class="col-12 col-md-3 bg-light filtres-colonne">
                         <div class="titre mt-0 d-flex align-items-center">
                             <i class="bi bi-filter-square me-2 mt-3"></i>
                             <h4 class="mb-0 mt-3">Filtres</h3>
@@ -117,7 +108,7 @@ $voituresFiltrees = array_filter($voitures, function ($voiture) use ($typesSelec
                             <button type="submit" class="btn mt-3 w-100 btn-primary">Rechercher</button>
                         </form>
                     </div>
-                    <div class="col-12 offset-1 col-md-7 bg-light ms-0 voitures-container">
+                    <div class="col-12 col-md-8 bg-light ms-md-4 voitures-container">
                         <div class="titres">
                             <h3 class="mt-3">Les voitures</h3>
                         </div>
@@ -141,9 +132,6 @@ $voituresFiltrees = array_filter($voitures, function ($voiture) use ($typesSelec
         </section>  
     </div>
     </body>
-
-    </html>
-
 
 
     <!-- Fin du contenu de la page -->
