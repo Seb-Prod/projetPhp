@@ -74,7 +74,7 @@ function updateVoitureOptions($pdo, $idVoiture, $type, $data) {
 
     // Pour chaque option cochée
     foreach ($data[$type] as $idOption) {
-        $prix = $data[$prix_field][$idOption];
+        $prix = intval($data[$prix_field][$idOption]);
 
         if (in_array($idOption, $options_actuelles)) {
             // Mise à jour du prix si existe déjà

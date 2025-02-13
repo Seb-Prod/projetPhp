@@ -54,7 +54,7 @@ function genererBlocSelection($titre, $elements, $elementsAssocies, $type)
 
     foreach ($elements as $key => $value) {
         $checked = '';
-        $prix = '';
+        $prix = '0';
 
         foreach ($elementsAssocies as $elementAssocie) {
             if ($elementAssocie["id_$type"] == $key) {
@@ -69,7 +69,7 @@ function genererBlocSelection($titre, $elements, $elementsAssocies, $type)
         echo "<label class='form-check-label' for='$value'>$value</label>";
         echo '</div>';
         echo '<div class="form-group mb-2 d-flex align-items-center">';
-        echo "<input class='form-control' type='number' name='prix{$type}[$key]' value='$prix'>";
+        echo "<input class='form-control' type='number' name='prix{$type}[$key]' value='$prix' min='0'>";
         echo '<span class="ms-2">€</span>';
         echo '</div>';
     }
