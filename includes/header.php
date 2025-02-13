@@ -40,7 +40,7 @@ if(isset($_SESSION['nom']) and $_SESSION['nom'] != ""){
         <!-- Left section -->
         <div class="d-flex align-items-center">
             <!-- Theme switcher button - visible only on mobile -->
-            <button class="btn btn-primary d-lg-none me-2" id="themeSwitcher">
+            <button class="btn btn-secondary d-lg-none me-2" id="themeSwitcher">
                 <i class="bi bi-moon-stars"></i>
             </button>
             
@@ -71,7 +71,7 @@ if(isset($_SESSION['nom']) and $_SESSION['nom'] != ""){
 
             <!-- Theme switcher button - visible only on desktop -->
             <div class="d-none d-lg-block">
-                <button class="btn btn-primary" id="themeSwitcher-desktop">
+                <button class="btn btn-secondary" id="themeSwitcher-desktop">
                     <i class="bi bi-moon-stars"></i> Changer le thème
                 </button>
             </div>

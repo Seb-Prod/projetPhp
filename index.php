@@ -6,7 +6,9 @@ require_once 'includes/header.php';
 define('SECURE_ACCESS', true);
 require_once 'config.php';
 $pdo = getDBConnection();
+
 require_once 'functionFiltres.php'; // Fichier contenant la fonction getItem()
+
 $moteurs = getItem($pdo, 'moteurs'); // Récupère les moteurs
 $marques = getItem($pdo, 'marques'); // Récupère les marques
 $types = getItem($pdo, 'types'); // Récupère les types de véhicules
@@ -59,9 +61,9 @@ $voituresFiltrees = array_filter($voitures, function ($voiture) use ($typesSelec
                         </div>
                         <form method="GET" action="index.php">
                             <div class="dropdown mt-3">
-                            <button class="btn bg-white dropdown-toggle w-100 d-flex justify-content-between align-items-center border" type="button" data-bs-toggle="dropdown">
-                                <span>Type de véhicules</span>
-                                <span id="type-counter" class="badge bg-light text-dark ms-auto">0</span>
+                            <button class="btn bg-white text-dark dropdown-toggle w-100 d-flex justify-content-between align-items-center border" type="button" data-bs-toggle="dropdown">
+                                    <span>Type de véhicules</span>
+                                    <span id="type-counter" class="badge bg-light text-dark ms-auto">0</span>
                             </button>
                                 <ul class="dropdown-menu">
                                     <?php foreach ($types as $type) : ?>
@@ -76,7 +78,7 @@ $voituresFiltrees = array_filter($voitures, function ($voiture) use ($typesSelec
                                 </ul>
                             </div>
                             <div class="dropdown mt-3">
-                                <button class="btn bg-white dropdown-toggle w-100 d-flex justify-content-between align-items-center border" type="button" data-bs-toggle="dropdown">
+                                <button class="btn bg-white text-dark dropdown-toggle w-100 d-flex justify-content-between align-items-center border" type="button" data-bs-toggle="dropdown">
                                     Marques <span id="marque-counter" class="badge bg-light text-dark ms-auto">0</span>
                                 </button>
                                 <ul class="dropdown-menu">
@@ -91,7 +93,7 @@ $voituresFiltrees = array_filter($voitures, function ($voiture) use ($typesSelec
                                 </ul>
                             </div>
                             <div class="dropdown mt-3">
-                                <button class="btn bg-white dropdown-toggle w-100 d-flex justify-content-between align-items-center border" type="button" data-bs-toggle="dropdown">
+                                <button class="btn bg-white text-dark dropdown-toggle w-100 d-flex justify-content-between align-items-center border" type="button" data-bs-toggle="dropdown">
                                     Moteur <span id="moteur-counter" class="badge bg-light text-dark ms-auto">0</span>
                                 </button>
                                 <ul class="dropdown-menu">
@@ -113,7 +115,7 @@ $voituresFiltrees = array_filter($voitures, function ($voiture) use ($typesSelec
                             <h3 class="mt-3">Les voitures</h3>
                         </div>
                         <?php foreach ($voituresFiltrees as $voiture) : ?>
-                            <div class="car-item card mt-3 col-md-5 mx-md-1">
+                            <div class="car-item card mt-3 col-md-5 mx-md-1 border">
                                 <img src="img/<?php echo htmlspecialchars($voiture['photo_nom'] ?? 'default.jpg'); ?>" class="card-img-top shadow" alt="<?php echo htmlspecialchars($voiture['voiture_nom'] ?? ''); ?>">
                                 <div class="card-body">
                                     <h5 class="card-title"><?php echo htmlspecialchars($voiture['voiture_nom'] ?? ''); ?></h5>
