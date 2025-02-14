@@ -32,6 +32,7 @@ function checkRequiredFields($requiredFields)
 $couleurs = [];
 $jantes = [];
 $motorisation = [];
+$description = null;
 
 function chargeItemBdd($item)
 {
@@ -92,6 +93,12 @@ if (checkRequiredFields(['id', 'model', 'marque'])) {
     $couleurs = chargeItemBdd("couleurs");
     $jantes = chargeItemBdd("jantes");
     $motorisation = chargeItemBdd("moteurs");
+    
+    $requetteDescription = getDescription($pdo, $id);
+    if($requetteDescription['success']){
+        $description = $requetteDescription['data'][0]["description"];
+    }
+
 
     $requetteMoteursAssocies = getItemAndPrice($pdo, "voitures_moteurs", "id_moteur", $id);
     $requetteCouleurAssocies = getItemAndPrice($pdo, "voitures_couleurs", "id_couleur", $id);
@@ -123,6 +130,14 @@ if (checkRequiredFields(['id', 'model', 'marque'])) {
         <div class="form-group mb-1">
             <form action="adminEditResult.php" method="post">
                 <input type="hidden" name="id" value="<?php echo $id ?>">
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group mb-2">
+                            <label class="form-label" for="inputDescription">Description</label>
+                            <textarea class="form-control" name="description" id="inputDescription"><?php echo $description ?></textarea>
+                        </div>
+                    </div>
+                </div>
                 <div class="row">
                     <?php
                     genererBlocSelection("Motorisations", $motorisation, $moteursAssocies, "moteur");

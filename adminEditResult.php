@@ -29,11 +29,21 @@ if (isset($_POST['id']) and $_POST['id'] != "") {
     }else{
         delVoitureOptions($pdo, $idVoiture, "voitures_jantes");
     }
+    updateVoitureDescription($pdo, $idVoiture);
     header("Location:admin.php");
     exit();
 }
 
-
+function updateVoitureDescription($pdo, $idVoiture){
+    if(isset($_POST['description'])){
+        $txt = $_POST['description'];
+        $sql = "UPDATE  voitures
+                   SET description = ? 
+                   WHERE ID = ?";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([$txt, $idVoiture]);
+    }
+}
 
 function updateVoitureOptions($pdo, $idVoiture, $type, $data) {
     // Configuration des paramètres selon le type

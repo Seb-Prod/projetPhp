@@ -279,3 +279,30 @@ function getItemAndPrice($pdo, $table, $champs, $idVoiture)
         ];
     }
 }
+
+function getDescription($pdo, $id){
+    try{
+        $sql = "SELECT description FROM voitures WHERE ID = ?";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([$id]);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        if($result){
+            return[
+                'success' => true,
+                'message' => 'Données récupérées avec succès',
+                'data' => $result
+            ];
+        }else{
+            return[
+                'success' => false,
+                'message' => 'Rien de trouvé'
+            ];
+        }
+    }catch(PDOException $e){
+        return [
+            'success' => false,
+            'message' => 'Erreur : ' . $e->getMessage(),
+            'data' => []
+        ];
+    }
+}
