@@ -150,11 +150,6 @@ if (checkRequiredFields(['id', 'model', 'marque'])) {
                     <div class="mb-1">
                         <button type="submit" class="btn btn-primary">Valider</button>
                     </div>
-                    <div class="row">
-                        <div class="mb-1 text-center">
-                            <button type="submit" class="btn btn-primary">Valider</button>
-                        </div>
-                    </div>
                 </form>
             </div>
         </div>
