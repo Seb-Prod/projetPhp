@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost
--- Généré le : mer. 12 fév. 2025 à 09:09
+-- Généré le : ven. 14 fév. 2025 à 11:37
 -- Version du serveur : 10.4.28-MariaDB
 -- Version de PHP : 8.2.4
 
@@ -91,8 +91,22 @@ CREATE TABLE `marques` (
 --
 
 INSERT INTO `marques` (`ID`, `nom`) VALUES
-(5, 'Nissan'),
-(6, 'Fiat');
+(7, 'Ferrari'),
+(8, 'Porsche'),
+(9, 'Fiat'),
+(10, 'Ford'),
+(11, 'Honda'),
+(12, 'Hyundai'),
+(13, 'Kia'),
+(14, 'Mazda'),
+(15, 'Nissan'),
+(16, 'Opel'),
+(17, 'Volvo'),
+(18, 'Alfa Romeo'),
+(19, 'Land Rover'),
+(20, 'Mini'),
+(21, 'Seat'),
+(22, 'Skoda');
 
 -- --------------------------------------------------------
 
@@ -132,7 +146,15 @@ CREATE TABLE `photos` (
 INSERT INTO `photos` (`ID`, `nom`) VALUES
 (4, 'image_67ac54d1e47ff0.10198538.jpg'),
 (5, 'image_67ac54d1e4c520.69692613.jpg'),
-(6, 'image_67ac55218e13b0.10178956.jpg');
+(6, 'image_67ac55218e13b0.10178956.jpg'),
+(7, 'image_67ac682020b793.76770636.png'),
+(8, 'image_67ac68ff441dc9.36635181.png'),
+(9, 'image_67af131591bab6.53820431.png'),
+(10, 'image_67af17a7c3a500.84194415.jpg'),
+(11, 'image_67af17a7c4d449.28265549.jpg'),
+(12, 'image_67af1977b9cbf8.95239938.jpg'),
+(13, 'image_67af1977bab676.42564296.jpg'),
+(14, 'image_67af1a348d02a9.14898541.jpg');
 
 -- --------------------------------------------------------
 
@@ -151,9 +173,10 @@ CREATE TABLE `types` (
 
 INSERT INTO `types` (`ID`, `nom`) VALUES
 (19, 'SUV'),
-(20, 'Breack'),
+(20, 'Break'),
 (21, 'Berline'),
-(22, 'Roadster');
+(22, 'Roadster'),
+(23, 'Citadine');
 
 -- --------------------------------------------------------
 
@@ -176,7 +199,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`ID`, `nom`, `prenom`, `pseudo`, `password`, `admin`) VALUES
 (25, 'Drillaud', 'Sébastien', 'root', '$2y$10$0XrkV9C/iqLC7xVg5jLlPOpcg9Z4DLm.ydJExui1riFLG56/YWjDu', 1),
-(26, 'bob', 'bob', 'bob', '$2y$10$paLgfUP.jx7p7d3T1b8i7.TSdZrOQM6sDnGUie.OogT8PKY3q4Qr.', 0);
+(26, 'bob', 'bob', 'bob', '$2y$10$paLgfUP.jx7p7d3T1b8i7.TSdZrOQM6sDnGUie.OogT8PKY3q4Qr.', 0),
+(28, 'drillaud', 'Sébastien', 'boby', '$2y$10$uV4LHJHcOui5kDMMitXwE.QQwkp3EeaCvcgXh1pExys8WNWo2lZ/O', 0);
 
 -- --------------------------------------------------------
 
@@ -198,8 +222,9 @@ CREATE TABLE `voitures` (
 --
 
 INSERT INTO `voitures` (`ID`, `nom`, `id_type`, `id_marque`, `description`, `date_sortie`) VALUES
-(108, 'Ariya', 19, 5, 'La petite dernière de chez Nissan', '2025-01-27'),
-(109, '500', 21, 6, '', '2025-02-01');
+(125, 'GT3RS', 22, 8, 'Les athlètes le savent : les meilleures performances exigent plus que des conditions idéales et de la chance. Il faut vouloir, à tout prix, devenir plus rapide et plus fort à chaque entraînement. Tout remettre en question, surtout soi-même. Et apprendre de chaque erreur. Dans cet esprit, Porsche continue de repousser les limites du possible et améliore encore ses performances sur circuit. Découvrez la nouvelle 911 GT3 RS, au meilleur de sa forme.', '2013-01-12'),
+(126, 'Ariya', 19, 15, 'Ce véhicule représente la vision de Nissan pour l&#039;avenir de la mobilité électrique et se positionne comme concurrent direct de modèles comme le Tesla Model Y ou le Volkswagen ID.4.', '2021-04-15'),
+(127, '500', 23, 9, 'Petite citadine de chez FIAT', '2025-02-01');
 
 -- --------------------------------------------------------
 
@@ -232,10 +257,10 @@ CREATE TABLE `voitures_jantes` (
 --
 
 INSERT INTO `voitures_jantes` (`id`, `id_voiture`, `id_jante`, `prix`) VALUES
-(12, 108, 6, 1000),
-(13, 108, 5, 0),
-(14, 109, 4, 0),
-(15, 109, 6, 160);
+(18, 125, 5, 0),
+(19, 126, 6, 2000),
+(20, 126, 5, 1500),
+(21, 127, 4, 0);
 
 -- --------------------------------------------------------
 
@@ -255,9 +280,11 @@ CREATE TABLE `voitures_moteurs` (
 --
 
 INSERT INTO `voitures_moteurs` (`ID`, `id_voiture`, `id_moteur`, `prix`) VALUES
-(33, 108, 9, 45000),
-(34, 109, 7, 15000),
-(35, 109, 8, 20000);
+(73, 125, 7, 245000),
+(74, 126, 9, 35000),
+(75, 127, 7, 15000),
+(76, 127, 9, 22000),
+(77, 127, 8, 18000);
 
 -- --------------------------------------------------------
 
@@ -276,9 +303,11 @@ CREATE TABLE `voitures_photos` (
 --
 
 INSERT INTO `voitures_photos` (`id`, `id_voiture`, `id_photo`) VALUES
-(2, 108, 4),
-(3, 108, 5),
-(4, 109, 6);
+(8, 125, 10),
+(9, 125, 11),
+(10, 126, 12),
+(11, 126, 13),
+(12, 127, 14);
 
 --
 -- Index pour les tables déchargées
@@ -400,7 +429,7 @@ ALTER TABLE `jantes`
 -- AUTO_INCREMENT pour la table `marques`
 --
 ALTER TABLE `marques`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT pour la table `moteurs`
@@ -412,49 +441,49 @@ ALTER TABLE `moteurs`
 -- AUTO_INCREMENT pour la table `photos`
 --
 ALTER TABLE `photos`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT pour la table `types`
 --
 ALTER TABLE `types`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT pour la table `voitures`
 --
 ALTER TABLE `voitures`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=128;
 
 --
 -- AUTO_INCREMENT pour la table `voitures_couleurs`
 --
 ALTER TABLE `voitures_couleurs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT pour la table `voitures_jantes`
 --
 ALTER TABLE `voitures_jantes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT pour la table `voitures_moteurs`
 --
 ALTER TABLE `voitures_moteurs`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
 
 --
 -- AUTO_INCREMENT pour la table `voitures_photos`
 --
 ALTER TABLE `voitures_photos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Contraintes pour les tables déchargées
