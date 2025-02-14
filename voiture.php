@@ -105,7 +105,7 @@ $photo = getCarPhoto($id_voiture);
     </div>
 </div>
 
-<div class="avis-section">
+<!-- <div class="avis-section">
     <h2>Avis clients</h2>
     <form action="ajouter_avis.php" method="POST">
         <input type="text" name="nom" placeholder="Votre nom" required>
@@ -117,6 +117,6 @@ $photo = getCarPhoto($id_voiture);
         </select>
         <button type="submit">Publier l'avis</button>
     </form>
-</div>
+</div> -->
 <script src="script.js"></script>
 <?php require_once 'includes/footer.php'; ?>
