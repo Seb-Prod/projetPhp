@@ -2,124 +2,109 @@
 $pageTitle = "Description voiture";
 require_once 'includes/header.php';
 
-$id_voiture = $_GET['id']; //Remplacé par un get lié sur la page de Moussa
 
-try {
-    
-    $sql = "SELECT vc.id_couleur, c.nom, vc.prix 
-    FROM voitures_couleurs vc
-    INNER JOIN couleurs c ON vc.id_couleur = c.id 
-    WHERE vc.id_voiture = :id_voiture";
+$id_voiture = $_GET['idVoiture']; // Correction du paramètre
 
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute(['id_voiture' => $id_voiture]);
 
-    $resultat = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-    if (!empty($resultat)) {
-        echo "Données récupérées avec succès :";
-        print_r($resultat);
-    } else {
-        echo "Aucun résultat trouvé.";
+function getVoitureCaracteristiques($id_voiture, $caracteristique) {
+    try {
+        $pdo = getDBConnection();
+        
+        $tables = [
+            'couleur' => ['table' => 'voitures_couleurs', 'join' => 'couleurs', 'id' => 'id_couleur'],
+            'jante' => ['table' => 'voitures_jantes', 'join' => 'jantes', 'id' => 'id_jante'],
+            'moteur' => ['table' => 'voitures_moteurs', 'join' => 'moteurs', 'id' => 'id_moteur']
+        ];
+        
+        if (!isset($tables[$caracteristique])) {
+            return ['error' => "Caractéristique invalide."];
+        }
+        
+        $table = $tables[$caracteristique]['table'];
+        $join = $tables[$caracteristique]['join'];
+        $id = $tables[$caracteristique]['id'];
+        
+        $sql = "SELECT vc.$id, c.nom, vc.prix FROM $table vc INNER JOIN $join c ON vc.$id = c.id WHERE vc.id_voiture = :id_voiture";
+        
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute(['id_voiture' => $id_voiture]);
+        
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        return ['error' => "Erreur SQL : " . $e->getMessage()];
     }
-
-} catch (PDOException $e) {
-    echo "Erreur SQL : " . $e->getMessage();
 }
+
+function getCarPhoto($id_voiture) {
+    try {
+        $pdo = getDBConnection();
+        
+        $sql = "SELECT p.nom AS photo FROM voitures_photos vp INNER JOIN photos p ON vp.id_photo = p.ID WHERE vp.id_voiture = :id_voiture LIMIT 1";
+        
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute(['id_voiture' => $id_voiture]);
+        
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        return ['error' => "Erreur SQL : " . $e->getMessage()];
+    }
+}
+
+$couleurs = getVoitureCaracteristiques($id_voiture, 'couleur');
+$jantes = getVoitureCaracteristiques($id_voiture, 'jante');
+$moteurs = getVoitureCaracteristiques($id_voiture, 'moteur');
+$photo = getCarPhoto($id_voiture);
 ?>
 
 <div id="pageVoiture">
-
-<div class="container">
-    <article class="colonne">
-        <!-- Début du contenu de la page -->
-        <div class="carousel">
-            <div class="carousel-inner">
-                <div class="slide">
-                    <img src="photos/dodgeviper.avi" alt="Image 1">
-                </div>
-                <div class="slide">
-                    <img src="photos/dodgeviper2.avif" alt="Image 2">
-                </div>
-                <div class="slide">
-                    <img src="photos/dodgeviper3.avif" alt="Image 3">
-                </div>
+    <div class="container">
+    <article class="car-preview">
+                    <?php if (isset($photo) && file_exists('img/' . $photo['photo'])): ?>
+                        <img src="img/<?php echo $photo['photo']; ?>" alt="Photo voiture" class="voiture-photo">
+                    <?php else: ?>
+                        <img src="img/default.jpg" alt="Photo non disponible" class="voiture-photo">
+                    <?php endif; ?>
+                </article>       
+        <article class="colonne">
+            <div class="options">
+                <h2>Personnalisez votre voiture</h2>
+                <label for="couleur">Couleur :</label>
+                <select id="couleur">
+                    <?php foreach ($couleurs as $couleur) : ?>
+                        <option value="<?php echo $couleur['id_couleur'] ?>" data-price="<?php echo $couleur['prix']; ?>">
+                            <?php echo $couleur['nom'] . ' (+ ' . $couleur['prix'] . '€)'; ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+                
+                <label for="jantes">Jantes :</label>
+                <select id="jantes">
+                    <?php foreach ($jantes as $jante) : ?>
+                        <option value="<?php echo $jante['id_jante'] ?>" data-price="<?php echo $jante['prix']; ?>">
+                            <?php echo $jante['nom'] . ' (+ ' . $jante['prix'] . '€)'; ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+                
+                <label for="motorisation">Motorisation :</label>
+                <select id="motorisation">
+                    <?php foreach ($moteurs as $moteur) : ?>
+                        <option value="<?php echo $moteur['id_moteur'] ?>" data-price="<?php echo $moteur['prix']; ?>">
+                            <?php echo $moteur['nom'] . ' (+ ' . $moteur['prix'] . '€)'; ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+                
+                <div id="panier"></div>
+                <button id="ajouter">Ajouter au panier</button>
+                <h3>Total: <span id="total">0</span>€</h3>
             </div>
-            <div class="carousel-controls">
-                <button id="prev">Précédent</button>
-                <button id="next">Suivant</button>
-            </div>
-            <div class="carousel-dots">
-                <span class="dot active"></span>
-            </div>
-        </div>
-    </article>
-    <article class="colonne">
-    <div class="options">
-        <h2>Personnalisez votre voiture</h2>
-        <p>Choisissez parmi nos différentes options :</p>
-        
-        <label for="couleur">Couleur :</label>
-        <select id="couleur">
-            <?php foreach($resultat as $couleur) : ?>
-                <option value="<?php echo $couleur['id_couleur']?>"><?php echo $couleur['nom']. ' prix : '. $couleur['prix'] . '€'?></option>
-                <?php endforeach?>
-      
-        </select>
-        
-        <label for="jantes">Jantes :</label>
-        <select id="jantes">
-            <option value="17\Alliage" data-price="700">17" Alliage (+700€)</option>
-            <option value="18\Alliage" data-price="800">18" Alliage (+800€)</option>
-            <option value="19\Alliage" data-price="900">19" Alliage (+900€)</option>
-            <option value="17\Chrome" data-price="1000">17" Chrome (+1000€)</option>
-            <option value="18\Chrome" data-price="1100">18" Chrome (+1100€)</option>
-            <option value="19\Chrome" data-price="1200">19" Chrome (+1200€)</option>
-        </select>
-        
-        <label for="motorisation">Motorisation :</label>
-        <select id="motorisation">
-            <option value="Essence" data-price="2000">Essence (+2000€)</option>
-            <option value="Diesel" data-price="2500">Diesel (+2500€)</option>
-            <option value="Hybride" data-price="3000">Hybride (+3000€)</option>
-            <option value="Électrique" data-price="3500">Électrique (+3500€)</option>
-        </select>
-        
-        <button id="ajouter">Ajouter au panier</button>
+        </article>
     </div>
-
-    <div class="panier-container">
-        <h2>Votre Panier</h2>
-        <ul id="panier"></ul>
-        <p>Total: <span id="total">0</span>€</p>
-    </div>
-    </article>
 </div>
 
-
-<h2>À vendre : Dodge Viper – Puissance et élégance incomparables !</h2>
-        <p>
-            Découvrez cette magnifique Dodge Viper, un bijou de performance et de design.
-            Son coloris rouge éclatant, rehaussé par ses bandes blanches emblématiques,
-            lui confère une allure agressive et racée.
-        </p>
-        <ul>
-            <li>✅ Moteur V10 offrant des performances exceptionnelles</li>
-            <li>✅ Design iconique avec un long capot et des lignes aérodynamiques</li>
-            <li>✅ Jantes sport et pneus haute performance</li>
-            <li>✅ Intérieur raffiné et sportif, conçu pour les passionnés de vitesse</li>
-        </ul>
-        <p>
-            Cette Viper est photographiée sous un magnifique ciel bleu, avec un décor automnal
-            qui met en valeur son éclat et son charisme. Un véhicule unique, prêt à faire
-            tourner les têtes et à offrir des sensations inégalées.
-        </p>
-        <p>📍 Disponible immédiatement – Contactez-nous pour plus d’informations ou pour un essai ! 🚗💨</p>
-
-        <div class="avis-section">
-        <h2>Avis clients</h2>
-
-    <!-- Formulaire d'ajout d'avis -->
+<div class="avis-section">
+    <h2>Avis clients</h2>
     <form action="ajouter_avis.php" method="POST">
         <input type="text" name="nom" placeholder="Votre nom" required>
         <textarea name="commentaire" placeholder="Votre commentaire" required></textarea>
@@ -130,15 +115,6 @@ try {
         </select>
         <button type="submit">Publier l'avis</button>
     </form>
-    
-            </div>
-            </div>
-<?php
-//require_once 'includes/db.php';
-?>
-
+</div>
 <script src="script.js"></script>
-
-<?php
-require_once 'includes/footer.php';
-?>
+<?php require_once 'includes/footer.php'; ?>

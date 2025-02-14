@@ -45,9 +45,9 @@
     // Boucle pour ajouter des écouteurs d'événement "click" sur chaque "dot"
     $dots.forEach(($elt, key) => $elt.addEventListener('click', () => slideTo(key)));
     // Ajout d'un écouteur d'événement "click" sur le bouton "prev" pour afficher le slide précédent
-    prev.addEventListener('click', () => slideTo(--currentSlide))
+    // prev.addEventListener('click', () => slideTo(--currentSlide))
     // Ajout d'un écouteur d'événement "click" sur le bouton "next" pour afficher le slide suivant
-    next.addEventListener('click', () => slideTo(++currentSlide))
+    // next.addEventListener('click', () => slideTo(++currentSlide))
     // Initialisation de l'intervalle pour afficher les slides
     intervalId = setInterval(showSlide, slideTimeout)
     // Boucle sur tous les éléments de type "slide" pour ajouter des écouteurs d'événement pour les interactions avec la souris et le toucher
@@ -103,7 +103,9 @@ document.addEventListener('DOMContentLoaded', function() {
         const prixMotorisation = parseInt(motorisationSelected.getAttribute('data-price'));
 
         // Calculer le total
-        total += prixCouleur + prixJantes + prixMotorisation;
+        total = prixCouleur + prixJantes + prixMotorisation;
+
+        panierList.innerHTML='';
 
         // Ajouter les options au panier
         const liCouleur = document.createElement('li');
