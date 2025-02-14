@@ -58,7 +58,7 @@ function initialisation()
 function genererBlocSelection($titre, $elements, $type)
 {
     echo '<div class="col">';
-    echo '<div class="card container p-3">';
+    echo '<div class="card container p-3 admin">';
     echo "<h6 class='card-title'>$titre</h6>";
 
     foreach ($elements as $key => $value) {
@@ -84,7 +84,7 @@ initialisation();
 ?>
 <!-- Début du contenu de la page -->
 <form action="adminAddResult.php" method="post" enctype="multipart/form-data">
-    <div class="card container p-3 bg-light mt-3 mb-3">
+    <div class="card container p-3 bg-light mt-3 mb-3 border admin">
         <h4 class="card-title mb-3">Ajout d'un nouveau Model</h4>
         <div class="row">
             <div class="col">
@@ -131,7 +131,7 @@ initialisation();
         <!-- ajout des photos -->
         <div class="row">
             <div class="col">
-                <div class="card container p-3">
+                <div class="card container p-3 admin">
                     <h6 class="card-title">Images du véhicule</h6>
                     <div class="mb-3">
                         <input type="file" class="form-control" name="imagesGalerie[]" id="imagesGalerie"

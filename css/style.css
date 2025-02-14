@@ -223,7 +223,7 @@ footer {
     width: 18rem;
 }
 
-.dark-mode .admin{
+.dark-mode .admin {
     background-color: #222529 !important;
 }
 
@@ -234,6 +234,8 @@ footer {
 .mentions{
     cursor: pointer;
 }
+
+
 /* .dark-mode a {
     color: #0dcaf0 !important; /* Couleur pour les liens */
 /* }
