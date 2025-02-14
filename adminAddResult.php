@@ -1,11 +1,12 @@
 <?php
 // Connection à la base de données
 define('SECURE_ACCESS', true);
-require_once 'config.php';
+require_once 'connection.php';
+$pdo = getDBConnection();
 
 // Inportation des fonctions
 require_once 'functions/functionsAdmin.php';
-$pdo = getDBConnection();
+
 
 
 // Champs attendu pour l'ajout d'un nouveau model
@@ -54,9 +55,9 @@ function addNewCar()
         $message = ajoutVoiture($pdo, $model, $type, $marque, $description, $date);
         if ($message['sucess']) {
             $idVoiture = intval($message['value']);
-            addOptions($idVoiture, ['motorisation', 'prixMotorisation'], 'voitures_moteurs', 'id_moteur');
-            addOptions($idVoiture, ['couleur', 'prixCouleur'], 'voitures_couleur', 'id_couleur');
-            addOptions($idVoiture, ['jante', 'prixJante'], 'voitures_jantes', 'id_jante');
+            addOptions($idVoiture, ['motorisation', 'prixmotorisation'], 'voitures_moteurs', 'id_moteur');
+            addOptions($idVoiture, ['couleur', 'prixmouleur'], 'voitures_couleur', 'id_couleur');
+            addOptions($idVoiture, ['jante', 'prixjante'], 'voitures_jantes', 'id_jante');
             addImages($idVoiture);
         }
     }

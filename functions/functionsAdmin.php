@@ -150,7 +150,6 @@ function ajoutPhoto($pdo, $name)
                 'message' => "L'ajout de la photo à échoué"
             ];
         }
-
     } catch (PDOException $e) {
         $response = [
             'sucess' => false,
@@ -160,7 +159,8 @@ function ajoutPhoto($pdo, $name)
     return $response;
 }
 
-function ajoutPhotoVoiture($pdo, $idVoiture, $idPhoto){
+function ajoutPhotoVoiture($pdo, $idVoiture, $idPhoto)
+{
     try {
         // Préparation de la requête
         $sql = "INSERT INTO voitures_photos (id_voiture, id_photo) VALUES (:idVoiture, :idPhoto)";
@@ -193,7 +193,8 @@ function ajoutPhotoVoiture($pdo, $idVoiture, $idPhoto){
     return $response;
 }
 
-function getVoitures($pdo) {
+function getVoitures($pdo)
+{
     try {
         $sql = "SELECT COUNT(*) OVER() as total, 
                 voitures.ID, 
@@ -201,11 +202,11 @@ function getVoitures($pdo) {
                 marques.nom as nom_marque 
                 FROM voitures 
                 INNER JOIN marques ON voitures.id_marque = marques.ID";
- 
+
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
- 
+
         if (empty($result)) {
             return [
                 'success' => true,
@@ -213,7 +214,7 @@ function getVoitures($pdo) {
                 'data' => ['total' => 0, 'items' => []]
             ];
         }
- 
+
         $response = [
             'success' => true,
             'message' => 'requête ok',
@@ -229,17 +230,18 @@ function getVoitures($pdo) {
             'data' => $e->getCode()
         ];
     }
- 
-    return $response;
- }
 
- function deleteVoiture($pdo, $id) {
+    return $response;
+}
+
+function deleteVoiture($pdo, $id)
+{
     try {
         $sql = "DELETE FROM voitures WHERE ID = :id";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
- 
+
         $response = [
             'success' => true,
             'message' => 'Voiture supprimée avec succès',
@@ -252,6 +254,55 @@ function getVoitures($pdo) {
             'data' => $e->getCode()
         ];
     }
- 
+
     return $response;
- }
+}
+
+
+function getItemAndPrice($pdo, $table, $champs, $idVoiture)
+{
+    try {
+        $sql = "SELECT {$champs}, prix FROM {$table} WHERE id_voiture = ?";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([$idVoiture]);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return [
+            'success' => true,
+            'message' => 'Données récupérées avec succès',
+            'data' => $result
+        ];
+    } catch (PDOException $e) {
+        return [
+            'success' => false,
+            'message' => 'Erreur : ' . $e->getMessage(),
+            'data' => []
+        ];
+    }
+}
+
+function getDescription($pdo, $id){
+    try{
+        $sql = "SELECT description FROM voitures WHERE ID = ?";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([$id]);
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        if($result){
+            return[
+                'success' => true,
+                'message' => 'Données récupérées avec succès',
+                'data' => $result
+            ];
+        }else{
+            return[
+                'success' => false,
+                'message' => 'Rien de trouvé'
+            ];
+        }
+    }catch(PDOException $e){
+        return [
+            'success' => false,
+            'message' => 'Erreur : ' . $e->getMessage(),
+            'data' => []
+        ];
+    }
+}

@@ -4,9 +4,10 @@ session_start();
 
 // Connection à la base de données
 define('SECURE_ACCESS', true);
-require_once 'config.php';
-require_once 'functions/functionsAdmin.php';
+require_once 'connection.php';
 $pdo = getDBConnection();
+require_once 'functions/functionsAdmin.php';
+
 
 // Vérification si est admin
 if ($_SESSION["admin"] === 1) {

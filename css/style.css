@@ -161,7 +161,13 @@
     margin-bottom: 10px;
 }
 
-
+/* .voitures-container {
+    max-height: 90vh;
+    overflow-y: auto;
+} */
+.car-item {
+    width: 100%; /* Pour les petits écrans */
+}
 
 
 /* Mode sombre */
@@ -186,3 +192,41 @@
 #darkModeToggle:hover {
     background-color: #333;
 }
+
+.dark-mode .filtres-colonne{
+    background-color:#1f1f1f !important;
+}
+
+.dark-mode .voitures-container{
+    background-color: #1f1f1f !important;
+}
+
+.dark-mode .login{
+    background-color: #222529 !important;
+}
+
+.login{
+    width: 18rem;
+}
+
+.dark-mode .admin {
+    background-color: #222529 !important;
+}
+
+.modal-title {
+    color: white !important;
+}
+
+.mentions{
+    cursor: pointer;
+}
+
+
+/* .dark-mode a {
+    color: #0dcaf0 !important; /* Couleur pour les liens */
+/* }
+
+.dark-mode .btn-primary {
+    background-color: #0dcaf0 !important;
+    border-color: #0dcaf0 !important;
+} */ 

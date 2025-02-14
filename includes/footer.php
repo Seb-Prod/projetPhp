@@ -10,7 +10,7 @@
             <div class="col-12 col-md-4 text-md-center">
                 <ul class="list-unstyled mb-0">
                     <li>
-                        <a class="text-decoration-none text-dark" data-bs-toggle="modal" data-bs-target="#MentionsLegales">Mentions légales</a>
+                        <a class="text-decoration-none text-white mentions" data-bs-toggle="modal" data-bs-target="#MentionsLegales">Mentions légales</a>
                     </li>
                 </ul>
             </div>
@@ -22,12 +22,12 @@
                         </a>
                     </li>
                     <li class="d-flex align-items-center">
-                        <a href="https://www.linkedin.com/in/moussa-kebe-b36ba9226" class="text-decoration-none d-block text-white" target="_blank" data-bs-toggle="tooltip" title="Linkedin">
+                        <a href="https://www.linkedin.com/in/ludovic-denis-698b97196/" class="text-decoration-none d-block text-white" target="_blank" data-bs-toggle="tooltip" title="Linkedin">
                             <i class="bi bi-linkedin fs-5 me-2"></i> Ludovic Denis
                         </a>
                     </li>
                     <li class="d-flex align-items-center">
-                        <a href="https://www.linkedin.com/in/moussa-kebe-b36ba9226" class="text-decoration-none d-block text-white" target="_blank" data-bs-toggle="tooltip" title="Linkedin">
+                        <a href="https://www.linkedin.com/in/s%C3%A9bastien-drillaud-b68b3318a/" class="text-decoration-none d-block text-white" target="_blank" data-bs-toggle="tooltip" title="Linkedin">
                             <i class="bi bi-linkedin fs-5 me-2"></i> Sebastien Drillaud
                         </a>
                     </li>
@@ -37,13 +37,13 @@
 
         </div>
     </div>
-    <div class="modal fade" id="MentionsLegales" tabindex="-1" aria-labelledby="exampleModalLabel">
+    <div class="modal fade " id="MentionsLegales" tabindex="-1" aria-labelledby="examplModalLabel">
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
-            <div class="modal-header ">
-              <h5 class="modal-title modal-mentions">Mentions Légales</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
+          <div class="modal-header ">
+    <h5 class="modal-title modal-mentions text-dark" id="examplModalLabel">Mentions Légales</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
             <div class="modal-body">
                 <h6>Éditeur du site</h6>
             

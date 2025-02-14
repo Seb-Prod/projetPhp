@@ -23,13 +23,7 @@ if(isset($_SESSION["newUser_pseudo"])){
     $pseudo= $_SESSION["newUser_pseudo"];
 }
 
-
-// Connection à la base de données
-define('SECURE_ACCESS', true);
-require_once 'config.php';
-
 require_once 'functions/functionsUser.php';
-$pdo = getDBConnection();
 $nbUsers = getUserCount($pdo);
 
 // Si aucun user on créer un compte Admin
@@ -57,7 +51,7 @@ if (isset($_GET["message"]) and $_GET["message"] != '') {
 ?>
 <!-- Début du contenu de la page -->
 <div class="d-flex justify-content-center align-items-center vh-100 ">
-    <div class="card container d-flex justify-content-center align-items-center bg-light" style="width: 18rem;">
+    <div class="card container d-flex justify-content-center align-items-center bg-light border login ">
         <div class="card-body">
             <h4 class="card-title"><?php echo $cardTitle ?></h4>
             <form action="logInResult.php" method="post">

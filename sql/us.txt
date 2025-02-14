@@ -1,0 +1,35 @@
+
+🔹 Utilisateur (Acheteur) :
+
+En tant qu'acheteur, je veux pouvoir rechercher des voitures par critères (marque, modèle, prix, année) afin de trouver rapidement le véhicule qui me correspond.
+En tant qu'acheteur, je souhaite visualiser des photos détaillées de chaque voiture afin de bien évaluer son état et son design.
+En tant qu'acheteur, je veux consulter les caractéristiques techniques complètes d'un véhicule afin de prendre une décision éclairée.
+
+🔹 Utilisateur (Vendeur) :
+
+En tant que vendeur, je veux pouvoir ajouter facilement une nouvelle annonce de voiture avec tous ses détails.
+En tant que vendeur, je souhaite gérer mes annonces (modification, suppression) simplement.
+
+
+🔹 Fonctionnalités de Filtrage et Recherche :
+
+En tant qu'utilisateur, je veux filtrer les voitures par budget, marques, type, afin de voir uniquement les véhicules dans ma gamme de prix.
+	(En tant qu'utilisateur, je souhaite trier les résultats par prix. A voir)
+
+
+🔹 Fonctionnalités Avancées :
+En tant qu'acheteur je veux pouvoir choisir mes options et voir le prix.
+En tant qu'acheteur, je veux pouvoir enregistrer dans un panier mes options choisies.
+En tang que vendeur, je souhaite que mes acheteurs puissent mettre des commentaires sur chaque voitures.
+
+🔹 Sécurité et Confiance :
+
+En tant qu'utilisateur, je veux un système d'authentification sécurisé.
+En tant qu'acheteur, je souhaite voir des avis sur chaque modèle.
+En tant que vendeur, je veux protéger mes informations personnelles.
+
+🔹 Expérience Mobile :
+
+	(En tant qu'utilisateur mobile, je veux une application responsive adaptée aux smartphones. A voir)
+	
+
