@@ -5,7 +5,7 @@ require_once 'includes/header.php';
 
 $id_voiture = $_GET['idVoiture']; // Correction du paramètre
 
-
+//Recupere les informations des voitures depuis la page index.php
 function getVoitureCaracteristiques($id_voiture, $caracteristique) {
     try {
         $pdo = getDBConnection();
@@ -35,6 +35,7 @@ function getVoitureCaracteristiques($id_voiture, $caracteristique) {
     }
 }
 
+//Récupération de la partie photo depuis la page indexp.php
 function getCarPhoto($id_voiture) {
     try {
         $pdo = getDBConnection();
@@ -54,6 +55,7 @@ $couleurs = getVoitureCaracteristiques($id_voiture, 'couleur');
 $jantes = getVoitureCaracteristiques($id_voiture, 'jante');
 $moteurs = getVoitureCaracteristiques($id_voiture, 'moteur');
 $photo = getCarPhoto($id_voiture);
+
 ?>
 
 <div id="pageVoiture">
