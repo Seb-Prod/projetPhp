@@ -2,11 +2,6 @@
 $pageTitle = "Accueil";
 require_once 'includes/header.php';
 
-// Connection à la base de données
-define('SECURE_ACCESS', true);
-require_once 'config.php';
-$pdo = getDBConnection();
-
 require_once 'functionFiltres.php'; // Fichier contenant la fonction getItem()
 
 $moteurs = getItem($pdo, 'moteurs'); // Récupère les moteurs

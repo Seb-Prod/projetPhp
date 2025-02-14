@@ -23,13 +23,7 @@ if(isset($_SESSION["newUser_pseudo"])){
     $pseudo= $_SESSION["newUser_pseudo"];
 }
 
-
-// Connection à la base de données
-define('SECURE_ACCESS', true);
-require_once 'config.php';
-
 require_once 'functions/functionsUser.php';
-$pdo = getDBConnection();
 $nbUsers = getUserCount($pdo);
 
 // Si aucun user on créer un compte Admin

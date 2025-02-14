@@ -5,7 +5,7 @@ echo '</pre>';
 
 // Connection à la base de données
 define('SECURE_ACCESS', true);
-require_once 'config.php';
+require_once 'connection.php';
 $pdo = getDBConnection();
 
 $idVoiture = null;

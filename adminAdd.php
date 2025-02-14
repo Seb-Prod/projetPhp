@@ -12,12 +12,7 @@ if ($_SESSION["admin"] === 1) {
     exit();
 }
 
-// Connection à la base de données
-define('SECURE_ACCESS', true);
-require_once 'config.php';
-
 require_once 'functions/functionsAdmin.php';
-$pdo = getDBConnection();
 
 // initialisation des variables
 $marques = [];

@@ -1,12 +1,10 @@
 <?php
 $pageTitle = "Description voiture";
 require_once 'includes/header.php';
-define('SECURE_ACCESS', true);
-require_once 'config.php';
+
 $id_voiture = $_GET['id']; //Remplacé par un get lié sur la page de Moussa
-$pdo = getDBConnection();
+
 try {
-    $pdo = getDBConnection();
     
     $sql = "SELECT vc.id_couleur, c.nom, vc.prix 
     FROM voitures_couleurs vc

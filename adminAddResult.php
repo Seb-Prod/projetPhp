@@ -1,11 +1,12 @@
 <?php
 // Connection à la base de données
 define('SECURE_ACCESS', true);
-require_once 'config.php';
+require_once 'connection.php';
+$pdo = getDBConnection();
 
 // Inportation des fonctions
 require_once 'functions/functionsAdmin.php';
-$pdo = getDBConnection();
+
 
 
 // Champs attendu pour l'ajout d'un nouveau model
