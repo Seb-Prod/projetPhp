@@ -40,13 +40,6 @@ if(isset($_SESSION['nom']) and $_SESSION['nom'] != ""){
 
 <body>
     <header>
-<<<<<<< HEAD
-        <nav>
-            <ul>
-                <li>
-                    <a href="index.php">Accueil</a>
-                    <button id="darkModeToggle">🌙 Mode Sombre</button>
-=======
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom bg-dark">
     <div class="container">
         <!-- Left section -->
@@ -70,7 +63,6 @@ if(isset($_SESSION['nom']) and $_SESSION['nom'] != ""){
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
                     <a class="nav-link" href="index.php">Accueil</a>
->>>>>>> develop
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="<?php echo htmlspecialchars($lien); ?>"><?php echo htmlspecialchars($txt); ?></a>

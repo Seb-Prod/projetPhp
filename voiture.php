@@ -4,12 +4,6 @@ require_once 'includes/header.php';
 
 $id_voiture = $_GET['id']; //Remplacé par un get lié sur la page de Moussa
 
-try {
-    
-    $sql = "SELECT vc.id_couleur, c.nom, vc.prix 
-    FROM voitures_couleurs vc
-    INNER JOIN couleurs c ON vc.id_couleur = c.id 
-    WHERE vc.id_voiture = :id_voiture";
 
 function getVoitureCaracteristiques($id_voiture, $caracteristique) {
     try {
