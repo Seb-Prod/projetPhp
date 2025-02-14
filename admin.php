@@ -32,7 +32,7 @@ if ($voitures['success']) {
 ?>
 <!-- Début du contenu de la page -->
 <div class="container d-flex flex-column justify-content-center align-items-center vh-100">
-    <div class="card p-4 border admin">
+    <div class="card p-4 border admin bg-light">
         <h4 class="card-title text-center">Admin</h4>
         <div class="form-group mb-2">
             <a class="btn btn-primary w-100" href="adminAdd.php" role="button">Ajout d'un nouveau model</a>

@@ -31,7 +31,7 @@ if (checkRequiredFields(['id', 'model'], 'marque')) {
 
 ?>
 <!-- Début du contenu de la page -->
-<div class="d-flex justify-content-center align-items-center">
+<div class="d-flex justify-content-center align-items-center vh-100">
     <div class="card container d-flex justify-content-center align-items-center bg-light border login ">
         <div class="card-body">
             <h5 class="card-title">Supprimer les "<b><?php echo $model ?></b>" de la BDD</h5>

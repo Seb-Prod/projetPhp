@@ -49,7 +49,7 @@ function chargeItemBdd($item)
 function genererBlocSelection($titre, $elements, $elementsAssocies, $type)
 {
     echo '<div class="col">';
-    echo '<div class="card container p-3">';
+    echo '<div class="card container p-3 admin">';
     echo "<h6 class='card-title'>$titre</h6>";
 
     foreach ($elements as $key => $value) {
@@ -117,29 +117,28 @@ if (checkRequiredFields(['id', 'model', 'marque'])) {
 
 ?>
 <!-- Début du contenu de la page -->
-<div class="card container p-1">
-    <div class="card-body">
-        <h4 class="card-title">Modifier les "<b><?php echo $marque . ' ' . $model ?></b>" dans la BDD</h4>
-        <div class="form-group mb-1">
-            <form action="adminEditResult.php" method="post">
-                <input type="hidden" name="id" value="<?php echo $id ?>">
-                <div class="row">
-                    <?php
-                    genererBlocSelection("Motorisations", $motorisation, $moteursAssocies, "moteur");
-                    genererBlocSelection("Couleurs", $couleurs, $couleursAssocies, "couleur");
-                    genererBlocSelection("Jantes", $jantes, $jantesAssocies, "jante");
-                    ?>
-
-                </div>
-                <div class="row">
-                    <div class="mb-1">
-                        <button type="submit" class="btn btn-primary">Valider</button>
+<div class="d-flex justify-content-center align-items-center vh-100">
+    <div class="card p-3 border bg-light admin">
+        <div class="card-body">
+            <h4 class="card-title">Modifier les "<b><?php echo $marque . ' ' . $model ?></b>" dans la BDD</h4>
+            <div class="form-group mb-1">
+                <form action="adminEditResult.php" method="post">
+                    <input type="hidden" name="id" value="<?php echo $id ?>">
+                    <div class="row ">
+                        <?php
+                        genererBlocSelection("Motorisations", $motorisation, $moteursAssocies, "moteur");
+                        genererBlocSelection("Couleurs", $couleurs, $couleursAssocies, "couleur");
+                        genererBlocSelection("Jantes", $jantes, $jantesAssocies, "jante");
+                        ?>
                     </div>
-                </div>
-            </form>
+                    <div class="row">
+                        <div class="mb-1 text-center">
+                            <button type="submit" class="btn btn-primary">Valider</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
-
-
     </div>
 </div>
 
