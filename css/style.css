@@ -20,6 +20,10 @@
     margin: auto;
 }
 
+img.voiture-photo {
+    width: 100%;
+}
+
 @media screen and (max-width: 768px) {
     #pageVoiture .container {
         grid-template-columns: 1fr;
