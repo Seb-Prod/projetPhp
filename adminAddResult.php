@@ -56,7 +56,7 @@ function addNewCar()
         if ($message['sucess']) {
             $idVoiture = intval($message['value']);
             addOptions($idVoiture, ['motorisation', 'prixmotorisation'], 'voitures_moteurs', 'id_moteur');
-            addOptions($idVoiture, ['couleur', 'prixmouleur'], 'voitures_couleur', 'id_couleur');
+            addOptions($idVoiture, ['couleur', 'prixcouleur'], 'voitures_couleurs', 'id_couleur');
             addOptions($idVoiture, ['jante', 'prixjante'], 'voitures_jantes', 'id_jante');
             addImages($idVoiture);
         }

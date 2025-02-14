@@ -5,6 +5,7 @@ define('SECURE_ACCESS', true);
 require_once 'connection.php';
 $pdo = getDBConnection();
 
+
 $admin = false;
 if (isset($_SESSION['admin']) and $_SESSION["admin"] === 1) {
     $admin = true;
