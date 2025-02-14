@@ -2,7 +2,7 @@
 $pageTitle = "Accueil";
 require_once 'includes/header.php';
 
-require_once 'functionFiltres.php'; // Fichier contenant la fonction getItem()
+require_once 'functions/functionFiltres.php'; // Fichier contenant la fonction getItem()
 
 $moteurs = getItem($pdo, 'moteurs'); // Récupère les moteurs
 $marques = getItem($pdo, 'marques'); // Récupère les marques
@@ -65,8 +65,8 @@ $voituresFiltrees = array_filter($voitures, function ($voiture) use ($typesSelec
                                         <li>
                                             <label class="dropdown-item">
                                                 <input type="checkbox" name="types[]" class="type-checkbox"
-                                                    value="<?php echo htmlspecialchars($type); ?>">
-                                                <?php echo htmlspecialchars($type); ?>
+                                                    value="<?php echo ($type); ?>">
+                                                <?php echo ($type); ?>
                                             </label>
                                         </li>
                                     <?php endforeach ?>
@@ -80,8 +80,8 @@ $voituresFiltrees = array_filter($voitures, function ($voiture) use ($typesSelec
                                     <?php foreach ($marques as $marque) { ?>
                                         <li>
                                             <label class="dropdown-item">
-                                                <input type="checkbox" name="marques[]" value="<?php echo htmlspecialchars($marque); ?>" class="marque-checkbox">
-                                                <?php echo htmlspecialchars($marque); ?>
+                                                <input type="checkbox" name="marques[]" value="<?php echo($marque); ?>" class="marque-checkbox">
+                                                <?php echo($marque); ?>
                                             </label>
                                         </li>
                                     <?php } ?>
@@ -95,8 +95,8 @@ $voituresFiltrees = array_filter($voitures, function ($voiture) use ($typesSelec
                                     <?php foreach ($moteurs as $moteur) { ?>
                                         <li>
                                             <label class="dropdown-item">
-                                                <input type="checkbox" name="moteurs[]" value="<?php echo htmlspecialchars($moteur); ?>" class="moteur-checkbox">
-                                                <?php echo htmlspecialchars($moteur); ?>
+                                                <input type="checkbox" name="moteurs[]" value="<?php echo($moteur); ?>" class="moteur-checkbox">
+                                                <?php echo($moteur); ?>
                                             </label>
                                         </li>
                                     <?php } ?>
@@ -111,12 +111,13 @@ $voituresFiltrees = array_filter($voitures, function ($voiture) use ($typesSelec
                         </div>
                         <?php foreach ($voituresFiltrees as $voiture) : ?>
                             <div class="car-item card mt-3 col-md-5 mx-md-1 border">
-                                <img src="img/<?php echo htmlspecialchars($voiture['photo_nom'] ?? 'default.jpg'); ?>" class="card-img-top shadow" alt="<?php echo htmlspecialchars($voiture['voiture_nom'] ?? ''); ?>">
+                                <img src="img/<?php echo($voiture['photo_nom'] ?? 'default.jpg'); ?>" class="card-img-top shadow" alt="<?php echo($voiture['voiture_nom'] ?? ''); ?>">
                                 <div class="card-body">
-                                    <h5 class="card-title"><?php echo htmlspecialchars($voiture['voiture_nom'] ?? ''); ?></h5>
-                                    <p class="card-text"><?php echo htmlspecialchars($voiture['description'] ?? ''); ?></p>
-                                    <p><strong>Marque :</strong> <?php echo htmlspecialchars($voiture['marque_nom'] ?? ''); ?></p>
-                                    <p><strong>Date de sortie :</strong> <?php echo htmlspecialchars($voiture['date_sortie'] ?? ''); ?></p>
+                                    <h5 class="card-title"><?php echo($voiture['voiture_nom'] ?? ''); ?></h5>
+                                    <p class="card-text"><?php echo($voiture['description'] ?? ''); ?></p>
+                                    <p><strong>Marque :</strong> <?php echo($voiture['marque_nom'] ?? ''); ?></p>
+                                    <p><strong>Date de sortie :</strong> <?php echo ($voiture['date_sortie'] ?? ''); ?></p>
+                                    <p><strong>Moteur :</strong> <?php echo($voiture['moteur_nom'] ?? ''); ?></p>
                                     <a href="voiture.php?idVoiture=<?php echo $voiture['voiture_id'] ?>" class="btn btn-primary">Voir plus</a>
                                 </div>
                             </div>
